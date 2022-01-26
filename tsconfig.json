@@ -1,0 +1,59 @@
+{
+  "compilerOptions": {
+    //指定eslint版本
+    "target": "esnext",
+    //指定生成哪个模块系统代码
+    "module": "esnext",
+    //启用所有严格类型检查选项
+    "strict": true,
+    // 支持jsx并且是preserve模式，一共三种（preserve,react,react-native）,默认preserve
+    "jsx": "preserve",
+    // 从tslib中导出辅助函数
+    "importHelpers": true,
+    // 如何处理模块
+    "moduleResolution": "node",
+    // 启用实验性的ES装饰器
+    "experimentalDecorators": true,
+    // 忽略所有的声明文件（ *.d.ts）的类型检查
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "types": [
+      //要包含的类型声明文件名列表
+      "node",
+      "webpack-env",
+      "jest",
+      "vite/client",
+      "lodash"
+      // 如果想使用import.meta.env使用环境变量需要配置这个
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "Assets": [
+        "src/assets"
+      ]
+    },
+    "lib": [
+      //编译过程需要引入的库
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "include": [ //指定需要编译处理的文件列表
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  "exclude": [  //解析include选项包含的文件的时候，需要忽略掉文件列表
+    "node_modules"
+  ]
+}

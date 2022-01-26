@@ -1,0 +1,22 @@
+// base color
+$mainColor: #409EFF;
+$blue: #409EFF;
+
+//header
+$headerHeight: 50px;
+//navbar
+$navbarHeight: 50px;
+//sidebar
+$logoHeight: 50px;
+$sideBarWidth: 240px;
+// fontColor
+
+// bgColor
+//borderColor
+// the :export directive is the magic sauce for webpack
+// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
+:export {
+  mainColor: $mainColor;
+  logoHeight: $logoHeight;
+  sideBarWidth:$sideBarWidth;
+}
