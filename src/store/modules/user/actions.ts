@@ -1,4 +1,4 @@
-import {Mutations, UserMutationTypes} from "./mutations"
+import {Mutations, UserMutationEnum} from "./mutations"
 import {ActionContext, ActionTree} from "vuex";
 import {UserState} from "@/store/modules/user/state";
 import {RootState} from "@/store";
@@ -23,12 +23,6 @@ type AugmentedActionContext = {
     ): ReturnType<Mutations[k]>
 } & Omit<ActionContext<UserState, RootState>, 'commit'>
 
-// type test = {
-//     a: number
-// }
-// const obj = {
-//     a: 1
-// }
 
 interface Actions {
     //也可以简单的写成
@@ -40,7 +34,7 @@ const actions: Actions & ActionTree<UserState, RootState> = {
     [UserActionEnum.LOGIN]({commit}: AugmentedActionContext, payload: { username: string, password: string }) {
         return new Promise((resolve, reject) => {
             login(payload).then((res) => {
-                commit(UserMutationTypes.SET_TOKEN, res.data.token)
+                commit(UserMutationEnum.SET_TOKEN, res.data.token)
                 sessionStorage.setItem("token", res.data.token)
                 resolve(res)
             }).catch((error) => {
@@ -51,8 +45,11 @@ const actions: Actions & ActionTree<UserState, RootState> = {
     [UserActionEnum.GET_USER_INFO]({commit}: AugmentedActionContext) {
         return new Promise((resolve, reject) => {
             getInfo().then(({data}) => {
-                commit(UserMutationTypes.SET_NAME, data.name)
-                commit(UserMutationTypes.SET_ROLES, data.roles)
+                commit(UserMutationEnum.SET_NAME, data.name)
+                commit(UserMutationEnum.SET_ROLES, data.roles)
+                if (data.avatar) {
+                    commit(UserMutationEnum.SET_AVATAR, data.avatar)
+                }
                 resolve(data)
             }).catch((err) => {
                 reject(err)
@@ -61,7 +58,7 @@ const actions: Actions & ActionTree<UserState, RootState> = {
 
     },
     [UserActionEnum.RESET_TOKEN]({commit}: AugmentedActionContext) {
-        commit(`user/${UserMutationTypes.RESET_TOKEN}`, undefined)
+        commit(`${UserMutationEnum.RESET_TOKEN}`, undefined)
     }
 
 }

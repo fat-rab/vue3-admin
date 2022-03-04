@@ -33,13 +33,15 @@ import {Lock, User} from '@element-plus/icons-vue'
 import {ElForm} from "element-plus";
 import {useStore} from "vuex";
 import {UserActionEnum} from "@/store/modules/user/actions";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
+import {loginQuery} from "@/views/login/TS";
 
 export default {
   name: "Login",
   setup() {
     const store = useStore();
     const router = useRouter();
+
     const loginFormRef = ref<InstanceType<typeof ElForm>>()
     const loading = ref(false)
     const loginForm = reactive({
@@ -58,6 +60,22 @@ export default {
         trigger: 'blur'
       }]
     }
+    let redirect = ''
+    const otherQuery = {}
+
+    //获取重定向信息
+    function getQuery(query: loginQuery): void {
+      redirect = query.redirect || ''
+      Object.keys(query).forEach((key) => {
+        if (key !== 'redirect') {
+          otherQuery[key] = query[key]
+        }
+      })
+    }
+
+    const route = useRoute()
+    getQuery(route.query)
+
     const login = (username: string, password: string): void => {
       if (!loginFormRef.value) return
       loginFormRef.value.validate((valid: boolean | undefined) => {
@@ -65,7 +83,10 @@ export default {
               loading.value = true
               store.dispatch(`user/${UserActionEnum.LOGIN}`, {username, password}).then(() => {
                 loading.value = false
-                router.push("/")
+                router.push({
+                  path: redirect || "/",
+                  query: otherQuery
+                })
               })
             }
           }

@@ -1,18 +1,19 @@
 <template>
-  <div>
+  <div class="sidebar-container">
     <sidebar-logo :is-collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
+        :default-active="activeMenu"
         :collapse="isCollapse"
+        :collapse-transition="false"
         :unique-opened="false"
         mode="vertical"
-        class="el-menu-vertical"
       >
         <sidebar-item
           v-for="route in routes"
           :key="route.path"
           :item="route"
-          :is-collapse="isCollapse"
+          :basePath="route.path"
         />
       </el-menu>
     </el-scrollbar>
@@ -24,8 +25,10 @@ import SidebarLogo from "./SidebarLogo.vue";
 import SidebarItem from "./SidebarItem.vue"
 import {computed} from "vue";
 import {useStore} from "vuex";
-import {constantRoutes} from "@/router";
-import variables from '@/styles/variables.scss'
+import {constantModules, linkModules} from "@/router";
+import {useRoute} from "vue-router";
+
+
 export default {
   name: "Sidebar",
   components: {
@@ -34,17 +37,22 @@ export default {
   },
   setup() {
     const store = useStore();
+    const route = useRoute();
     const isCollapse = computed(() => {
       return !store.state.setting.showTitle
     })
     const routes = computed(() => {
-      return [...constantRoutes, ...store.state.permission.permissionRoutes,]
+      return [...constantModules, ...store.state.permission.permissionRoutes, ...linkModules]
+    })
+    const activeMenu = computed(() => {
+      const {meta, path} = route
+      return meta?.activeMenu || path
     })
 
     return {
       routes,
       isCollapse,
-      variables
+      activeMenu
     }
   }
 }
@@ -52,11 +60,5 @@ export default {
 
 <style lang="scss" scoped>
 
-
-// el-menu 正常展开样式
-.el-menu-vertical:not(.el-menu--collapse) {
-  width: 200px;
-  border: none;
-}
 
 </style>

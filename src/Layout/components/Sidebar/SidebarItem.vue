@@ -1,84 +1,111 @@
 <template>
-  <div v-if="!item.meta||!item.meta.hidden">
-    <!--    首页特殊处理-->
-    <!--    需要加上!item.meta判断，否则正常只有一个的二级菜单也会拉平渲染成一集菜单-->
-    <template v-if="onlyChild&&!onlyChild.children&&!item.meta">
-      <sidebar-item-link
-        v-if="onlyChild.meta"
-        :to="onlyChild.path"
-      >
+  <div v-if="!item.hidden">
+    <template v-if="(hasOneShowingChild&&!item.alwaysShow&&!oneShowingChild.children?.length)||(noChildren&&!noRender)">
+      <sidebar-item-link v-if="oneShowingChild.meta" :to="resolvePath(oneShowingChild.path)">
         <el-menu-item
-          v-if="onlyChild.meta.title"
-          :index="onlyChild.path"
+          :index="resolvePath(oneShowingChild.path)"
         >
-          <el-icon v-if="onlyChild.meta.icon">
-            <component :is="onlyChild.meta.icon" />
-          </el-icon>
-          <span>{{ onlyChild.meta.title }}</span>
+          <sidebar-icon v-if="oneShowingChild.meta?.icon" :icon-name="oneShowingChild.meta?.icon" />
+          <template #title>
+            <span>{{ oneShowingChild.meta?.title }}</span>
+          </template>
         </el-menu-item>
       </sidebar-item-link>
     </template>
-    <el-sub-menu v-if="item.meta&&(item.children&&item.children.length>0)" :index="item.path">
-      <template #title>
-        <el-icon v-if="item.meta &&item.meta.icon">
-          <component :is="item.meta.icon" />
-        </el-icon>
-        <span v-if="item.meta &&item.meta.title">{{ item.meta.title }}</span>
-      </template>
-      <template v-for="it in item.children" :key="it.path">
-        <!--        二级菜单直接渲染-->
-        <sidebar-item-link v-if="(!it.children||it.children.length===0)" :to="it.path">
-          <el-menu-item
-            v-if="it.meta.title"
-            :index="it.path"
-          >
-            <span>{{ it.meta.title }}</span>
-          </el-menu-item>
-        </sidebar-item-link>
-        <!--         三级菜单，再次使用组件，其实就是从el-sub-menu（第18行开始，最开始的针对首页的处理不会渲染了）-->
+
+
+    <template v-else>
+      <el-sub-menu v-if="!noRender" :index="resolvePath(item.path)">
+        <template #title>
+          <sidebar-icon v-if="item.meta.icon" :icon-name="item.meta.icon" />
+          <span>{{ item.meta.title }}</span>
+        </template>
         <sidebar-item
-          v-else
-          :item="it"
-          :is-collapse="isCollapse"
+          v-for="child in item.children"
+          :key="child.path"
+          :item="child"
+          :basePath="resolvePath(child.path)"
           class="nest-menu"
         />
-      </template>
-    </el-sub-menu>
+      </el-sub-menu>
+    </template>
   </div>
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, PropType} from "vue";
-import {RouteRecordRaw} from "vue-router";
-import SidebarItemLink from './SidebarItemLink.vue'
+import {defineComponent, PropType} from "vue";
+import {AppRouteRecordRaw} from "@/router";
+import {judgeShowingChild} from "@/utils/route";
+import SidebarIcon from "./SidebarIcon.vue"
+import SidebarItemLink from "@/Layout/components/Sidebar/SidebarItemLink.vue";
+import {isExternal} from "@/utils/judge";
+import path from 'path'
 
 export default defineComponent({
   name: "SidebarItem",
   components: {
-    SidebarItemLink
+    SidebarItemLink,
+    SidebarIcon
   },
   props: {
     item: {
-      type: Object as PropType<RouteRecordRaw>,
+      type: Object as PropType<AppRouteRecordRaw>,
       required: true
     },
-    isCollapse: {
-      type: Boolean,
+    basePath: {
+      type: String,
       required: true
     }
   },
   setup(props) {
-    const onlyChild = computed(() => {
-      if (props.item.children?.length === 1) {
-        return props.item.children[0]
+    let hasOneShowingChild = false
+    //v-if="(hasOneShowingChild&&!item.alwaysShow&&!oneShowingChild.children?.length)||(noChildren&&!noRender)"
+    //noChildren&&!noRender：如果没有children并且不是一级菜单，则说明递归到最后一层，直接渲染item
+
+    //oneShowingChildArr如果有且只有一个child，则将其赋值给oneShowingChild
+    //通过判断alwaysShow是否总是展示父级菜单。来判断直接渲染还是再次递归，如果直接渲染，则拉平只有一个子菜单的菜单
+    //并且通过判断oneShowingChild是否存在children来判断渲染还是递归
+    let oneShowingChild = {...props.item}
+    let noChildren = false
+    const showingChildren = judgeShowingChild(props.item)
+    // 判断是否有且只有一个child
+    if (showingChildren.length === 1) {
+      hasOneShowingChild = true
+      oneShowingChild = showingChildren[0]
+    }
+    if (!showingChildren.length) {
+      //如果已经没有showingChildren,说明可能已经到了最后一层，则将本身的path重制为""
+      //避免与父级 传递的resolvePath(child.path)拼接出现错误路径
+      oneShowingChild = {...props.item, path: ''}
+      noChildren = true
+    }
+
+    let noRender = false
+    if (noChildren && typeof props.item.component === 'object') {
+      //v-if="!noRender" 如果一级菜单的children为空，则不渲染
+      noRender = true
+    }
+
+    function resolvePath(route: string): string {
+      if (isExternal(route)) {
+        return route
       }
-      return null
-    })
+      if (isExternal(props.basePath)) {
+        return props.basePath
+      }
+      return path.resolve(props.basePath, route)
+    }
+
     return {
-      onlyChild
+      oneShowingChild,
+      hasOneShowingChild,
+      noChildren,
+      noRender,
+      resolvePath
     }
   }
-})
+});
+
 </script>
 
 <style lang="scss" scoped>

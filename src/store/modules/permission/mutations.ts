@@ -1,18 +1,18 @@
-import {RouteRecordRaw} from "vue-router";
 import {PermissionState} from "./state"
 import {MutationTree} from "vuex";
+import {AppRouteRecordRaw} from "@/router";
 
-export enum PermissionMutationTypes {
+export enum PermissionMutationEnum {
     SET_PERMISSION_ROUTES = 'SET_PERMISSION_ROUTES'
 }
 
 export interface Mutations<s = PermissionState> {
-    [PermissionMutationTypes.SET_PERMISSION_ROUTES](state: s, payload: Array<RouteRecordRaw>): void
+    [PermissionMutationEnum.SET_PERMISSION_ROUTES](state: s, payload: Array<AppRouteRecordRaw>): void
 }
 
 
 const mutations: MutationTree<PermissionState> & Mutations = {
-    [PermissionMutationTypes.SET_PERMISSION_ROUTES]: (state: PermissionState, payload: Array<RouteRecordRaw>): void => {
+    [PermissionMutationEnum.SET_PERMISSION_ROUTES]: (state: PermissionState, payload: Array<AppRouteRecordRaw>): void => {
         state.permissionRoutes = payload
     }
 }

@@ -1,19 +1,23 @@
-import {RouteRecordRaw} from "vue-router";
 import Layout from "@/Layout/index.vue"
+import {AppRouteRecordRaw} from "@/router";
+import {markRaw} from "vue";
 
-const sysManagerRouter: Array<RouteRecordRaw> = [
+
+const sysManagerRouter: Array<AppRouteRecordRaw> = [
     {
         path: '/sysManager',
         name: 'sysManager',
+        alwaysShow: true,
+        redirect: 'noRedirect',
         meta: {
             title: '系统管理',
-            icon: 'Avatar',
+            icon: 'Setting',
             roles: ["admin"]
         },
-        component: Layout,
+        component: markRaw(Layout),
         children: [
             {
-                path: '/sysMessage',
+                path: 'sysMessage',
                 name: "sysMessage",
                 meta: {
                     title: '系统信息'
@@ -21,15 +25,17 @@ const sysManagerRouter: Array<RouteRecordRaw> = [
                 component: () => import(/* webpackChunkName: "sysMessage" */"@/views/sysManager/sysMessage.vue")
             },
             {
-                path: "/sysTest",
+                path: "sysTest",
                 name: 'sysTest',
+                alwaysShow: true,
+                redirect: 'noRedirect',
                 meta: {
                     title: '错误测试'
                 },
                 component: () => import(/* webpackChunkName: "sysTest" */"@/views/sysManager/sysTest.vue"),
                 children: [
                     {
-                        path: '/sysTest1',
+                        path: 'sysTest1',
                         name: "sysTest1",
                         meta: {
                             title: '错误测试1'

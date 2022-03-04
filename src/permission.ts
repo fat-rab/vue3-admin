@@ -1,12 +1,13 @@
 import store from "@/store/index"
 import router from "@/router/index"
-import {NavigationGuardNext, RouteLocationNormalized} from "vue-router";
+import {NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw} from "vue-router";
 import NProgress from "nprogress"
 import 'nprogress/nprogress.css'
 import {whiteList} from "@/setting"
 import {UserActionEnum} from "@/store/modules/user/actions";
-import {ActionsEnum} from "@/store/modules/permission/actions"
+import {PermissionActionsEnum} from "@/store/modules/permission/actions"
 import {ElMessage} from "element-plus";
+
 
 NProgress.configure({showSpinner: false}) //进度环隐藏
 
@@ -20,13 +21,13 @@ router.beforeEach(async(to: RouteLocationNormalized, form: RouteLocationNormaliz
                 try {
                     await store.dispatch(`user/${UserActionEnum.GET_USER_INFO}`)
                     const roles = store.state.user.roles
-                    await store.dispatch(`permission/${ActionsEnum.GET_PERMISSION_ROUTES}`, roles)
+                    await store.dispatch(`permission/${PermissionActionsEnum.GET_PERMISSION_ROUTES}`, roles)
                     store.state.permission.permissionRoutes.forEach((item) => {
-                        router.addRoute(item)
+                        router.addRoute(item as RouteRecordRaw)
                     })
                     next({...to, replace: true})
                 } catch (err) {
-                    store.dispatch(`user/${UserActionEnum.RESET_TOKEN}`)
+                    await store.dispatch(`user/${UserActionEnum.RESET_TOKEN}`)
                     next(`/login?redirect=${to.path}`)
                     ElMessage({
                         type: 'error',

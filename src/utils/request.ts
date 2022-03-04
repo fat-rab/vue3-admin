@@ -4,11 +4,13 @@ import {ElMessage, ElMessageBox} from "element-plus";
 import {UserActionEnum} from "@/store/modules/user/actions";
 import store from '@/store'
 
+
 interface resStructure {
     code: number
     data: any
     message: string
 }
+
 const request = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_API,
     timeout: 5000
@@ -45,7 +47,7 @@ request.interceptors.response.use((response: AxiosResponse) => {
                 }
             )
                 .then(() => {
-                    // 情况token,刷新页面重新登陆
+                    // 重置token,刷新页面重新登陆
                     store.dispatch(`user/${UserActionEnum.RESET_TOKEN}`).then(() => {
                         location.reload()
                     })

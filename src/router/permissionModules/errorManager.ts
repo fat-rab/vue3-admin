@@ -1,18 +1,22 @@
-import {RouteRecordRaw} from "vue-router";
 import Layout from "@/Layout/index.vue"
+import {AppRouteRecordRaw} from "@/router";
+import {markRaw} from "vue";
 
-const errorManagerRouter: Array<RouteRecordRaw> = [
+const errorManagerRouter: Array<AppRouteRecordRaw> = [
     {
         path: '/errManager',
         name: 'errManager',
+        alwaysShow: true,
+        redirect: 'noRedirect',
         meta: {
             title: '错误管理',
-            icon: 'Avatar'
+            icon: 'Aim'
         },
-        component: Layout,
+        // markRaw 标记 Layout，使其不会转换成代理对象，减少开销
+        component: markRaw(Layout),
         children: [
             {
-                path: '/errMessage',
+                path: 'errMessage',
                 name: "errMessage",
                 meta: {
                     title: '错误信息',
@@ -21,8 +25,8 @@ const errorManagerRouter: Array<RouteRecordRaw> = [
                 component: () => import(/* webpackChunkName: "errorMessage" */"@/views/errorManager/errorMessage.vue")
             },
             {
-                path: '/errorChart',
-                name: "errorChart",
+                path: 'errChart',
+                name: "errChart",
                 meta: {
                     title: '错误列表',
                     roles: ["charter"]

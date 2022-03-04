@@ -1,6 +1,6 @@
-import {RouteRecordRaw} from "vue-router";
+import {AppRouteRecordRaw} from "@/router";
 
-export const hasPermission = (roles: Array<string>, route: RouteRecordRaw) => {
+export const hasPermission = (roles: Array<string>, route: AppRouteRecordRaw) => {
     if (route.meta && route.meta.roles) {
         return roles.some(role => {
             if (route.meta?.roles !== undefined) {

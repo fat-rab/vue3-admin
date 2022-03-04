@@ -1,8 +1,8 @@
-import {RouteRecordRaw} from "vue-router";
 import {hasPermission} from "@/utils/permission";
+import {AppRouteRecordRaw} from "@/router";
 
-export function filterRoute(routes: Array<RouteRecordRaw>, roles: Array<string>): Array<RouteRecordRaw> {
-    const res: Array<RouteRecordRaw> = []
+export function filterRoute(routes: Array<AppRouteRecordRaw>, roles: Array<string>): Array<AppRouteRecordRaw> {
+    const res: Array<AppRouteRecordRaw> = []
     routes.forEach((route) => {
         const r = {...route}
         if (hasPermission(roles, r)) {
@@ -13,4 +13,11 @@ export function filterRoute(routes: Array<RouteRecordRaw>, roles: Array<string>)
         }
     })
     return res
+}
+export function judgeShowingChild(item: AppRouteRecordRaw): Array<AppRouteRecordRaw> {
+    let showingChildren: Array<AppRouteRecordRaw> = []
+    if (item.children?.length) {
+        showingChildren = item.children.filter((item) => !item.hidden)
+    }
+    return showingChildren
 }

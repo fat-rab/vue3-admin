@@ -1,7 +1,7 @@
-import {RouteRecordRaw} from "vue-router";
+import {AppRouteRecordRaw} from "@/router";
 
 export interface PermissionState {
-    permissionRoutes: Array<RouteRecordRaw>
+    permissionRoutes: Array<AppRouteRecordRaw>
 }
 
 const state = {

@@ -1,9 +1,12 @@
 <template>
   <div class="sidebar-logo-container">
     <transition name="sidebarLogoFade">
-      <router-link to="/" class="sidebar-link">
-        <img :class="[isCollapse?'noTitle':'title-logo']" :src="logo" alt="logo">
-        <span v-if="!isCollapse" class="sidebar-title">
+      <router-link v-if="isCollapse" key="collapse" class="sidebar-logo-link" to="/">
+        <img :src="logo" class="sidebar-logo">
+      </router-link>
+      <router-link v-else key="expand" class="sidebar-logo-link" to="/">
+        <img v-if="logo" :src="logo" class="sidebar-logo" style="margin-right: 12px">
+        <span class="sidebar-title">
           {{ title }}
         </span>
       </router-link>
@@ -13,7 +16,6 @@
 
 <script>
 import {title} from "@/setting"
-import logo from "@/assets/images/home/logo.png"
 
 export default {
   name: "SidebarLogo",
@@ -25,7 +27,7 @@ export default {
   },
   setup() {
     return {
-      logo,
+      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png',
       title
     }
   }
@@ -35,35 +37,36 @@ export default {
 <style lang="scss" scoped>
 @import "../../../styles/variables";
 
+.sidebarLogoFade-enter-active, .sidebarLogoFade-enter-active {
+  transition: opacity 0.28s;
+}
+
+.sidebarLogoFade-enter-from,
+.sidebarLogoFade-leave-to {
+  opacity: 0;
+}
+
 .sidebar-logo-container {
   width: 100%;
-  height: $logoHeight;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  height: $navbarHeight;
   text-align: center;
+  line-height: $navbarHeight;
+  background-color: $mainColor;
 
-  .sidebar-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .sidebar-logo-link {
     height: 100%;
 
-    .title-logo {
-      height: 100%;
-      margin-right: 12px;
-    }
-
-    .noTitle {
-      height: 60%;
+    .sidebar-logo {
+      width: 32px;
+      height: 32px;
+      vertical-align: middle;
     }
 
     .sidebar-title {
-      margin: 0;
-      color: $mainColor;
+      color: #fff;
       font-weight: 600;
-      line-height: 50px;
-      font-size: 24px;
       text-decoration: none;
+      vertical-align: middle;
     }
   }
 
