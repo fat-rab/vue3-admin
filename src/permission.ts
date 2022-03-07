@@ -25,7 +25,7 @@ router.beforeEach(async(to: RouteLocationNormalized, form: RouteLocationNormaliz
                     store.state.permission.permissionRoutes.forEach((item) => {
                         router.addRoute(item as RouteRecordRaw)
                     })
-                    next({...to, replace: true})
+                    next({ path: to.path, replace: true })
                 } catch (err) {
                     await store.dispatch(`user/${UserActionEnum.RESET_TOKEN}`)
                     next(`/login?redirect=${to.path}`)

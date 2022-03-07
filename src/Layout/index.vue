@@ -5,7 +5,7 @@
     </div>
     <div class="fixed-header">
       <navbar />
-      <tags-view />
+      <tags-view v-if="showTagsView" />
     </div>
     <app-main />
   </div>
@@ -18,6 +18,7 @@ import AppMain from "./AppMain.vue"
 import TagsView from "./components/TagsView/index.vue"
 import {useStore} from "vuex";
 import {computed} from "vue";
+import {showTagsView} from "@/setting"
 
 export default {
   name: "Layout",
@@ -34,14 +35,15 @@ export default {
     })
 
     return {
-      showTitle
+      showTitle,
+      showTagsView
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/variables";
+@import "../styles/variables.module";
 
 .app-wrapper {
   width: 100%;

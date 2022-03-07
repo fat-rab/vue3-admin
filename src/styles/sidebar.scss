@@ -1,0 +1,146 @@
+@import "variables.module";
+
+#app {
+  .sidebar-container {
+    .el-scrollbar {
+      height: calc(100% - #{$headerHeight});
+    }
+    .scrollbar-wrapper {
+      overflow-x: hidden !important;
+    }
+    transition: width 0.28s;
+    width: $sideBarWidth !important;
+    background-color: $menuBgColor;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    height: 100%;
+    overflow: hidden;
+    border-right: 1px solid $borderColor;
+
+    .el-menu {
+      border: none;
+      height: 100%;
+      width: 100%;
+
+      .el-menu-item, .el-sub-menu__title {
+        // 菜单选中样式
+        &.is-active {
+          background-color: $menuActiveBgColor;
+          color: $menuActiveTextColor;
+          font-weight: bold;
+        }
+
+        // 菜单悬浮样式
+        &:hover {
+          background-color: $menuHoverBgColor;
+        }
+      }
+
+      // 二级菜单样式
+      .el-sub-menu {
+        .el-menu-item {
+          span {
+            margin-left: 24px;
+          }
+        }
+
+        //三级菜单样式
+        .nest-menu {
+          .el-sub-menu__title {
+            span {
+              margin-left: 24px;
+            }
+          }
+        }
+      }
+    }
+
+
+    // 覆盖element 菜单缩放动画
+    .horizontal-collapse-transition {
+      transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+    }
+  }
+
+  //菜单收缩后调整图标位置
+  .hideSidebar {
+    .sidebar-container {
+      width: $closeSideBarWidth !important;
+
+      .el-menu-item {
+        padding: 0 !important;
+
+        .el-tooltip__trigger {
+          display: flex !important;
+          justify-content: center;
+          align-items: center;
+
+          .sidebar-icon {
+            margin: 0 auto;
+          }
+        }
+
+
+        // 隐藏首页菜单文字
+        span {
+          display: none;
+        }
+      }
+
+      .el-sub-menu {
+        .el-sub-menu__title {
+          padding: 0 !important;
+
+          .sidebar-icon {
+            margin: 0 auto;
+          }
+
+          // 隐藏普通菜单文字
+          span {
+            display: none;
+          }
+        }
+      }
+
+      // 隐藏箭头
+      .el-sub-menu__icon-arrow {
+        display: none;
+      }
+
+    }
+  }
+
+
+  // 图标颜色
+  .sidebar-icon {
+    color: $mainColor !important;
+  }
+}
+
+// 菜单收缩时，鼠标悬浮的弹窗
+.el-menu--vertical {
+  .el-menu-item {
+    &.is-active {
+      background: $menuActiveBgColor !important;
+      font-weight: bold;
+      color: $menuActiveTextColor;
+    }
+
+    &:hover {
+      background-color: $menuHoverBgColor !important;
+    }
+  }
+
+  .nest-menu {
+    .el-sub-menu {
+      .el-sub-menu__title {
+        &:hover {
+          background-color: $menuHoverBgColor !important;
+        }
+      }
+    }
+  }
+}

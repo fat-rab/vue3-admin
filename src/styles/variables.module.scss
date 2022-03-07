@@ -1,3 +1,6 @@
+
+
+
 // base color
 $mainColor: #3760F4;
 $blue: #3760F4;
@@ -27,11 +30,14 @@ $bgColor: #F5F7FA;
 //borderColor
 $borderColor: #e5e7ed;
 // https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
+// vite中，如果需要使用scss中定义的变量，需要将文件命名为 xxx.module.scss
 :export {
   mainColor: $mainColor;
   navbarHeight: $navbarHeight;
   sideBarWidth: $sideBarWidth;
   closeSideBarWidth: $closeSideBarWidth;
+  sideBarWidthNumber: 200;
+  closeSideBarWidthNumber: 52;
   menuBgColor: $menuBgColor;
   menuTextColor: $menuTextColor;
   menuActiveTextColor: $menuActiveTextColor

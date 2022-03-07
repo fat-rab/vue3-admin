@@ -1,0 +1,32 @@
+$--colors: (
+        "primary": (
+                "base": #3760F4,
+        ),
+        "success": (
+                "base": #13ce66,
+        ),
+        "warning": (
+                "base": #df9c26,
+        ),
+        "danger": (
+                "base": #ed5858,
+        ),
+        "error": (
+                "base": #ed5858,
+        ),
+  //"info": (
+  //        "base": #42b8dd,
+  //),
+);
+
+@forward "element-plus/theme-chalk/src/common/var" with
+  (
+    // do not use same name, it will override.
+    $colors: $--colors,
+  );
+
+// if you want to import all
+@use "element-plus/theme-chalk/src/index" as *;
+
+// You can comment it to hide debug info.
+// @debug $--colors;

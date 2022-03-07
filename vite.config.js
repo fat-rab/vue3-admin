@@ -13,6 +13,6 @@ export default defineConfig({
             //vite禁止在客户端访问内置模块代码
             path: "path-browserify",
         },
-        extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'] //忽略文件后缀, vue3不再支持忽略vue后缀
+        extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.scss'] //忽略文件后缀, vue3不再支持忽略vue后缀
     },
 })
