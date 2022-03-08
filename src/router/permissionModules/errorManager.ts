@@ -5,7 +5,7 @@ import {markRaw} from "vue";
 const errorManagerRouter: Array<AppRouteRecordRaw> = [
     {
         path: '/errManager',
-        name: 'errManager',
+        name: 'ErrManager',
         alwaysShow: true,
         redirect: 'noRedirect',
         meta: {
@@ -17,16 +17,17 @@ const errorManagerRouter: Array<AppRouteRecordRaw> = [
         children: [
             {
                 path: 'errMessage',
-                name: "errMessage",
+                name: "ErrMessage",
                 meta: {
                     title: '错误信息',
-                    roles: ["admin"]
+                    roles: ["admin"],
+                    noCache: true
                 },
                 component: () => import(/* webpackChunkName: "errorMessage" */"@/views/errorManager/errorMessage.vue")
             },
             {
                 path: 'errChart',
-                name: "errChart",
+                name: "ErrChart",
                 meta: {
                     title: '错误列表',
                     roles: ["charter"]

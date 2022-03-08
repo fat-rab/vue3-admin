@@ -8,7 +8,7 @@ import Layout from "@/Layout/index.vue";
         component: markRaw(Layout),
         children: [
             {
-                path: 'https://github.com/PanJiaChen/vue-element-admin',
+                path: 'https://gitee.com/oujinlong/yunjia-template-web3.0',
                 meta: {title: '外链', icon: 'link'}
             }
         ]

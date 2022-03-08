@@ -5,18 +5,19 @@ import {markRaw} from "vue";
 const userManagerRouter: Array<AppRouteRecordRaw> = [
     {
         path: '/userManager',
-        name: 'userManager',
+        name: 'UserManager',
         alwaysShow: true,
         redirect: 'noRedirect',
         meta: {
             title: '用户管理',
-            icon: 'Avatar'
+            icon: 'Avatar',
+            noCache: true
         },
         component: markRaw(Layout),
         children: [
             {
                 path: 'userMessage',
-                name: "userMessage",
+                name: "UserMessage",
                 meta: {
                     title: '用户信息'
                 },

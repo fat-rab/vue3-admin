@@ -19,6 +19,7 @@ import {useRoute} from "vue-router";
 import {computed} from "vue";
 import {showTagsView} from "@/setting"
 import {useStore} from "vuex";
+import {PermissionMutationEnum} from "@/store/modules/permission/mutations";
 
 export default {
   name: 'AppMain',
@@ -27,7 +28,9 @@ export default {
     const store = useStore()
     const showTitle = computed(() => store.state.setting.showTitle)
     const key = computed(() => route.path)
-    const cachedViews = []
+    // 获取缓存组件数组（储存的是route的name属性，组件name需要和route.name保持一致才能缓存）
+    store.commit(`permission/${PermissionMutationEnum.SET_CACHED_ROUTES}`)
+    const cachedViews = computed(() => store.state.permission.cachedRoutes)
     return {
       cachedViews,
       key,
@@ -39,23 +42,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "src/styles/variables.module";
+@import "../../styles/variables.module";
 
 .app-main {
-  position: relative;
+  position: absolute;
   top: $navbarHeight;
-  // sidebar没有使用怪异盒子模型，需要加上1px的右边框
-  left: calc(#{$closeSideBarWidth} + 1px);
+  right: 0;
   padding: 10px;
   background-color: $bgColor;
   height: calc(100vh - #{$headerHeight} - 20px);
+  // sidebar没有使用怪异盒子模型，需要减去1px的右边框
   width: calc(100% - #{$closeSideBarWidth} - 1px - 20px);
   overflow: hidden;
-  z-index: -1;
+  transition: width 0.28s;
 
   .main-box {
+    width: 100%;
     height: 100%;
     background-color: #ffffff;
+    transition: width 0.28s;
   }
 }
 
@@ -65,8 +70,7 @@ export default {
 }
 
 .show-title.app-main {
-  // sidebar没有使用怪异盒子模型，需要加上1px的右边框
-  left: calc(#{$sideBarWidth} + 1px);
+  // sidebar没有使用怪异盒子模型，需要减去1px的右边框
   width: calc(100% - #{$sideBarWidth} - 1px - 20px);
 }
 </style>

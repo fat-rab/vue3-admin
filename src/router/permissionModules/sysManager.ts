@@ -6,7 +6,7 @@ import {markRaw} from "vue";
 const sysManagerRouter: Array<AppRouteRecordRaw> = [
     {
         path: '/sysManager',
-        name: 'sysManager',
+        name: 'SysManager',
         alwaysShow: true,
         redirect: 'noRedirect',
         meta: {
@@ -18,7 +18,7 @@ const sysManagerRouter: Array<AppRouteRecordRaw> = [
         children: [
             {
                 path: 'sysMessage',
-                name: "sysMessage",
+                name: "SysMessage",
                 meta: {
                     title: '系统信息'
                 },
@@ -26,7 +26,7 @@ const sysManagerRouter: Array<AppRouteRecordRaw> = [
             },
             {
                 path: "sysTest",
-                name: 'sysTest',
+                name: 'SysTest',
                 alwaysShow: true,
                 redirect: 'noRedirect',
                 meta: {
@@ -36,7 +36,7 @@ const sysManagerRouter: Array<AppRouteRecordRaw> = [
                 children: [
                     {
                         path: 'sysTest1',
-                        name: "sysTest1",
+                        name: "SysTest1",
                         meta: {
                             title: '错误测试1'
                         },

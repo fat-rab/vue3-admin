@@ -59,6 +59,7 @@ const handleCommand = (command: string | number | object) => {
 
   .user-name {
     color: #ffffff;
+    font-size: 16px;
     font-weight: bold;
     line-height: $navbarHeight;
     vertical-align: middle;

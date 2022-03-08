@@ -162,7 +162,6 @@ export default defineComponent({
 
 .contextmenu {
   background: #fff;
-  z-index: 3000;
   position: absolute;
   list-style-type: none;
   padding: 5px 0;
@@ -210,11 +209,11 @@ export default defineComponent({
     padding: 0 10px;
 
     &:first-of-type {
-      margin-left: 15px;
+      margin-left: 10px;
     }
 
     &:last-of-type {
-      margin-right: 15px;
+      margin-right: 10px;
     }
 
     &.active {

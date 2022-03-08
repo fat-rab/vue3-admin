@@ -14,7 +14,7 @@
 <script lang="ts">
 import Sidebar from "./components/Sidebar/index.vue"
 import Navbar from "./components/Navbar/index.vue"
-import AppMain from "./AppMain.vue"
+import AppMain from "./components/AppMain.vue"
 import TagsView from "./components/TagsView/index.vue"
 import {useStore} from "vuex";
 import {computed} from "vue";
@@ -48,6 +48,9 @@ export default {
 .app-wrapper {
   width: 100%;
   height: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
 
   .openSidebar {
     width: $sideBarWidth;
@@ -64,6 +67,7 @@ export default {
     top: 0;
     right: 0;
     transition: width 0.28s;
+    z-index: 3000;
   }
 
   .hideSidebar + .fixed-header {
