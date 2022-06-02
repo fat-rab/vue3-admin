@@ -16,6 +16,7 @@ router.beforeEach(async(to: RouteLocationNormalized, form: RouteLocationNormaliz
     if (store.state.user.token) {
         if (to.path === "/login") {
             next({path: "/"})
+            NProgress.done()
         } else {
             if (store.state.user.roles.length === 0) {
                 try {
@@ -25,14 +26,14 @@ router.beforeEach(async(to: RouteLocationNormalized, form: RouteLocationNormaliz
                     store.state.permission.permissionRoutes.forEach((item) => {
                         router.addRoute(item as RouteRecordRaw)
                     })
-                    next({path: to.path, replace: true})
+                    next({...to, replace: true})
                 } catch (err) {
                     await store.dispatch(`user/${UserActionEnum.RESET_TOKEN}`)
-                    next(`/login?redirect=${to.path}`)
                     ElMessage({
                         type: 'error',
                         message: '该账号没有权限访问此页面,请更换账号'
                     })
+                    next(`/login?redirect=${to.path}`)
                     NProgress.done()
                 }
             } else {

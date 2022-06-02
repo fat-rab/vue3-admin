@@ -32,7 +32,7 @@ import {reactive, ref} from "vue";
 import {Lock, User} from '@element-plus/icons-vue'
 import {ElForm} from "element-plus";
 import {useStore} from "vuex";
-import {UserActionEnum} from "@/store/modules/user/actions";
+// import {UserActionEnum} from "@/store/modules/user/actions";
 import {useRoute, useRouter} from "vue-router";
 import {loginQuery} from "@/views/login/TS";
 
@@ -75,13 +75,12 @@ export default {
 
     const route = useRoute()
     getQuery(route.query)
-
     const login = (username: string, password: string): void => {
       if (!loginFormRef.value) return
       loginFormRef.value.validate((valid: boolean | undefined) => {
             if (valid) {
               loading.value = true
-              store.dispatch(`user/${UserActionEnum.LOGIN}`, {username, password}).then(() => {
+              store.dispatch(`user/ACTION_LOGIN`, {username, password}).then(() => {
                 loading.value = false
                 router.push({
                   path: redirect || "/",

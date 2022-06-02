@@ -4,8 +4,8 @@
       <el-scrollbar class="scrollbar-wrapper">
         <router-view v-slot="{Component}">
           <transition name="fade-transform" mode="out-in">
-            <keep-alive :include="cachedViews">
-              <component :is="Component" />
+            <keep-alive>
+              <component :is="Component" :key="key" />
             </keep-alive>
           </transition>
         </router-view>

@@ -4,6 +4,12 @@ import vue from '@vitejs/plugin-vue'
 const {resolve} = require('path')
 export default defineConfig({
     plugins: [vue()],
+    server: {
+        open:true, //启动自动打开浏览器
+        hmr: true, //启动热更新
+        host: '0.0.0.0',  // 设置0.0.0.0控制台显示外部访问的地址
+        port: 3000,
+    },
     resolve: {
         alias: {
             '@': resolve('src'),

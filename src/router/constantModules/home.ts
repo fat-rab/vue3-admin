@@ -11,7 +11,7 @@ const homeRouter: Array<AppRouteRecordRaw> = [
         children: [
             {
                 path: '/home',
-                component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
+                component: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
                 name: 'home',
                 meta: {
                     title: '首页',

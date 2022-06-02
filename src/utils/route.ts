@@ -28,9 +28,16 @@ export function judgeShowingChild(item: AppRouteRecordRaw): Array<AppRouteRecord
 export function getCachedRoutes(routes: Array<AppRouteRecordRaw>): Array<RouteRecordName> {
     const res: Array<RouteRecordName> = []
     routes.forEach((item) => {
-        if (item.meta && item.meta.noCache !== true && item.name) {
-            res.push(item.name)
-            // 如果父级路由不缓存（noCache=true），则子路由也不缓存
+        // 父路由可能不设置meta
+        if (item.meta) {
+            if (item.meta.noCache !== true && item.name) {
+                res.push(item.name)
+                // 如果父级路由不缓存（noCache=true），则子路由也不缓存
+                if (item.children) {
+                    res.push(...getCachedRoutes(item.children))
+                }
+            }
+        } else {
             if (item.children) {
                 res.push(...getCachedRoutes(item.children))
             }

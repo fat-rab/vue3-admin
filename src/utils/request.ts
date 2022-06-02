@@ -1,5 +1,5 @@
 import axios, {AxiosRequestConfig, AxiosResponse} from 'axios'
-import {getToken} from '@/utils/auth'
+import {getToken, TokenKey} from '@/utils/auth'
 import {ElMessage, ElMessageBox} from "element-plus";
 import {UserActionEnum} from "@/store/modules/user/actions";
 import store from '@/store'
@@ -17,8 +17,10 @@ const request = axios.create({
 })
 // 请求拦截器
 request.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
-    if (getToken) {
-        [config.headers as Object]["TOKEN"] = getToken()
+    if (getToken()) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        config.headers[TokenKey] = getToken()
     }
     return config;
 }, (error) => {
@@ -55,7 +57,7 @@ request.interceptors.response.use((response: AxiosResponse) => {
         }
         return Promise.reject(new Error(res.message || 'Error'))
     } else {
-        return res
+        return response
     }
 }, (error) => {
     ElMessage({

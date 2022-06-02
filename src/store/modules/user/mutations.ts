@@ -1,6 +1,7 @@
 import {MutationTree} from "vuex";
 import {UserState} from "./state"
 import {resetRouter} from "@/router";
+import {removeToken} from "@/utils/auth";
 
 export enum UserMutationEnum {
     SET_TOKEN = 'SET_TOKEN',
@@ -42,7 +43,8 @@ const mutations: MutationTree<UserState> & Mutations = {
         state.roles = []
         state.token = ''
         state.name = ''
-        sessionStorage.removeItem("token")
+        state.avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
+        removeToken()
         resetRouter()
     },
 }

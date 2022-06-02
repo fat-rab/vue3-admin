@@ -1,3 +1,5 @@
+import {getToken} from "@/utils/auth";
+
 export interface UserState {
     token: string
     name: string
@@ -6,7 +8,7 @@ export interface UserState {
 }
 
 const state: UserState = {
-    token: sessionStorage.getItem("token") || '',
+    token: getToken() || '',
     name: '',
     roles: [],
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'

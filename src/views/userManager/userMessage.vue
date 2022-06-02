@@ -1,12 +1,16 @@
 <template>
   <div>
     <input type="text">
+    123
   </div>
 </template>
 
 <script>
 export default {
-  name: 'UserMessage'
+  name: 'UserMessage',
+  setup(){
+    console.log(1)
+  }
 }
 </script>
 
