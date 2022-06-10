@@ -26,7 +26,12 @@ router.beforeEach(async(to: RouteLocationNormalized, form: RouteLocationNormaliz
                     store.state.permission.permissionRoutes.forEach((item) => {
                         router.addRoute(item as RouteRecordRaw)
                     })
-                    next({...to, replace: true})
+                    // 不直接使用next({...to, replace: true}),避免在动态路由的页面刷新浏览器出现警告并且跳转到404页面
+                    if (to.path == '/404' && to.redirectedFrom != undefined) {
+                        next({path: to.redirectedFrom?.fullPath, replace: true})
+                    } else {
+                        next({...to, replace: true})
+                    }
                 } catch (err) {
                     await store.dispatch(`user/${UserActionEnum.RESET_TOKEN}`)
                     ElMessage({

@@ -107,7 +107,7 @@ export const constantRoutes: Array<AppRouteRecordRaw> = [
         component: () => import('@/views/errorPage/401.vue'),
         hidden: true
     },
-    //{path: '/:pathMatch(.*)*', redirect: '/404', hidden: true}
+    {path: '/:pathMatch(.*)*', redirect: '/404', hidden: true}
 ]
 
 const router = createRouter({
