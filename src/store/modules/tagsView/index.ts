@@ -1,10 +1,11 @@
-import state, {tagsViewState} from "./state"
+import state from "./state"
 import mutations from "./mutations"
 import actions from "./actions";
 import {Module} from "vuex";
 import {RootState} from "@/store";
+import {TagsViewState} from "../../ts/tagsView";
 
-const tagsViewStore: Module<tagsViewState, RootState> = {
+const tagsViewStore: Module<TagsViewState, RootState> = {
     namespaced: true,
     state,
     mutations,

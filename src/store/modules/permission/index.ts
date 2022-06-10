@@ -1,5 +1,5 @@
 import {Module} from "vuex";
-import {PermissionState} from "@/store/modules/permission/state";
+import {PermissionState} from "../../ts/permission";
 import {RootState} from "@/store";
 import state from "./state"
 import mutations from "./mutations"

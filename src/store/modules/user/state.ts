@@ -1,11 +1,5 @@
 import {getToken} from "@/utils/auth";
-
-export interface UserState {
-    token: string
-    name: string
-    roles: string[]
-    avatar: string
-}
+import {UserState} from "../../ts/user"
 
 const state: UserState = {
     token: getToken() || '',

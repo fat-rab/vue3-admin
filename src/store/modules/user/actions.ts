@@ -1,17 +1,10 @@
-import {Mutations, UserMutationEnum} from "./mutations"
 import {ActionContext, ActionTree} from "vuex";
-import {UserState} from "@/store/modules/user/state";
+import {UserState, UserMutationEnum, Mutations, UserActionEnum} from "../../ts/user"
 import {RootState} from "@/store";
 import {getInfo, login} from "@/apis/user";
 import {setToken} from "@/utils/auth";
 
-export enum UserActionEnum {
-    LOGIN = 'ACTION_LOGIN',
-    RESET_TOKEN = 'ACTION_RESET_TOKEN',
-    GET_USER_INFO = 'ACTION_GET_USER_INFO',
-    CHANGE_ROLES = 'ACTION_CHANGE_ROLES',
-    LOGIN_OUT = 'ACTION_LOGIN_OUT',
-}
+
 
 // ReturnType 获取t函数的返回类型
 // Parameters 获取函数的参数类型
@@ -48,7 +41,7 @@ const actions: Actions & ActionTree<UserState, RootState> = {
         return new Promise((resolve, reject) => {
             getInfo().then(({data}) => {
                 commit(UserMutationEnum.SET_NAME, data.data.name)
-                commit(UserMutationEnum.SET_ROLES,data.data.roles)
+                commit(UserMutationEnum.SET_ROLES, data.data.roles)
                 if (data.data.avatar) {
                     commit(UserMutationEnum.SET_AVATAR, data.data.avatar)
                 }

@@ -1,13 +1,10 @@
-import {Mutations, PermissionMutationEnum} from "./mutations";
+import {PermissionState, Mutations, PermissionMutationEnum, PermissionActionsEnum} from "../../ts/permission";
+
 import {ActionContext, ActionTree} from "vuex";
-import {PermissionState} from "@/store/modules/permission/state";
 import {RootState} from "@/store";
 import {AppRouteRecordRaw, asyncRoutes} from "@/router"
 import {filterRoute} from "@/utils/route"
 
-export enum PermissionActionsEnum {
-    GET_PERMISSION_ROUTES = 'GET_PERMISSION_ROUTES'
-}
 
 type AugmentedActionContext = {
     commit<k extends keyof Mutations>(

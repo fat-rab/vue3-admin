@@ -1,8 +1,8 @@
 import {Mutations} from "./mutations"
 import {ActionContext, ActionTree} from "vuex";
-import {UserState} from "@/store/modules/user/state";
+import {UserState} from "../../ts/user";
 import {RootState} from "@/store";
-import {SettingState} from "@/store/modules/setting/state";
+import {SettingState} from "../../ts/setting";
 
 export enum UserActionEnum {
 
@@ -20,8 +20,6 @@ type AugmentedActionContext = {
 } & Omit<ActionContext<UserState, RootState>, 'commit'>
 
 
-// interface Actions {
-// }
 
 const actions: ActionTree<SettingState, RootState> = {}
 

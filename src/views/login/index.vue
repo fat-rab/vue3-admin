@@ -32,9 +32,9 @@ import {reactive, ref} from "vue";
 import {Lock, User} from '@element-plus/icons-vue'
 import {ElForm} from "element-plus";
 import {useStore} from "vuex";
-// import {UserActionEnum} from "@/store/modules/user/actions";
+import {UserActionEnum} from "@/store/ts/user";
 import {useRoute, useRouter} from "vue-router";
-import {loginQuery} from "@/views/login/TS";
+import {LoginQuery} from "@/views/login/TS";
 
 export default {
   name: "Login",
@@ -64,7 +64,7 @@ export default {
     const otherQuery = {}
 
     //获取重定向信息
-    function getQuery(query: loginQuery): void {
+    function getQuery(query: LoginQuery): void {
       redirect = query.redirect || ''
       Object.keys(query).forEach((key) => {
         if (key !== 'redirect') {
@@ -80,7 +80,7 @@ export default {
       loginFormRef.value.validate((valid: boolean | undefined) => {
             if (valid) {
               loading.value = true
-              store.dispatch(`user/ACTION_LOGIN`, {username, password}).then(() => {
+              store.dispatch(`user/${UserActionEnum.LOGIN}`, {username, password}).then(() => {
                 loading.value = false
                 router.push({
                   path: redirect || "/",

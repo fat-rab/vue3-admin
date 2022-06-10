@@ -1,26 +1,24 @@
-import {tagsViewMutation, tagsViewMutationEnum} from "@/store/modules/tagsView/mutations";
+import {TagsViewMutation, TagsViewMutationEnum,TagsViewActionEnum} from "../../ts/tagsView";
 import {RootState} from "@/store";
-import {tagDetail, tagsViewState} from "@/store/modules/tagsView/state";
+import {TagDetail, TagsViewState} from "../../ts/tagsView";
 import {ActionContext, ActionTree} from "vuex";
 
-enum tagsViewActionEnum {
-    SET_TAG_LIST = 'SET_TAG_LIST'
-}
+
 
 type AugmentedActionContext = {
-    commit<k extends keyof tagsViewMutation>(
+    commit<k extends keyof TagsViewMutation>(
         k: string,
-        payload: Parameters<tagsViewMutation[k]>[1]
-    ): ReturnType<tagsViewMutation[k]>
-} & Omit<ActionContext<tagsViewState, RootState>, 'commit'>
+        payload: Parameters<TagsViewMutation[k]>[1]
+    ): ReturnType<TagsViewMutation[k]>
+} & Omit<ActionContext<TagsViewState, RootState>, 'commit'>
 
 interface tagsViewActions {
-    [tagsViewActionEnum.SET_TAG_LIST](context: AugmentedActionContext, payload: Array<tagDetail>): void
+    [TagsViewActionEnum.SET_TAG_LIST](context: AugmentedActionContext, payload: Array<TagDetail>): void
 }
 
-const actions: tagsViewActions & ActionTree<tagsViewState, RootState> = {
-    [tagsViewActionEnum.SET_TAG_LIST]({commit}: AugmentedActionContext, payload: Array<tagDetail>): void {
-        commit(tagsViewMutationEnum.SET_TAG_LIST, payload)
+const actions: tagsViewActions & ActionTree<TagsViewState, RootState> = {
+    [TagsViewActionEnum.SET_TAG_LIST]({commit}: AugmentedActionContext, payload: Array<TagDetail>): void {
+        commit(TagsViewMutationEnum.SET_TAG_LIST, payload)
     }
 }
 

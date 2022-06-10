@@ -4,7 +4,7 @@
       <el-scrollbar class="scrollbar-wrapper">
         <router-view v-slot="{Component}">
           <transition name="fade-transform" mode="out-in">
-            <keep-alive>
+            <keep-alive :include="cachedViews">
               <component :is="Component" :key="key" />
             </keep-alive>
           </transition>
@@ -19,7 +19,7 @@ import {useRoute} from "vue-router";
 import {computed} from "vue";
 import {showTagsView} from "@/setting"
 import {useStore} from "vuex";
-import {PermissionMutationEnum} from "@/store/modules/permission/mutations";
+import {PermissionMutationEnum} from "@/store/ts/permission";
 
 export default {
   name: 'AppMain',
@@ -31,6 +31,7 @@ export default {
     // 获取缓存组件数组（储存的是route的name属性，组件name需要和route.name保持一致才能缓存）
     store.commit(`permission/${PermissionMutationEnum.SET_CACHED_ROUTES}`)
     const cachedViews = computed(() => store.state.permission.cachedRoutes)
+    // console.log(cachedViews.value, 'cachedViews')
     return {
       cachedViews,
       key,

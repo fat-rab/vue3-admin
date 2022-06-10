@@ -1,18 +1,18 @@
 import {createStore} from "vuex";
-import {UserState} from "@/store/modules/user/state";
-import {PermissionState} from "@/store/modules/permission/state";
+import {UserState} from "./ts/user";
+import {TagsViewState} from "./ts/tagsView";
+import {SettingState} from "./ts/setting";
+import {PermissionState} from "./ts/permission";
 import user from "./modules/user"
 import permission from "./modules/permission"
 import setting from "./modules/setting"
 import tagsView from "./modules/tagsView"
-import {SettingState} from "@/store/modules/setting/state";
-import {tagsViewState} from "@/store/modules/tagsView/state";
 
 export interface RootState {
     user: UserState
     permission: PermissionState
     setting: SettingState
-    tagsView:tagsViewState
+    tagsView: TagsViewState
 }
 
 const store = createStore({

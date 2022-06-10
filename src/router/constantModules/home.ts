@@ -12,7 +12,7 @@ const homeRouter: Array<AppRouteRecordRaw> = [
             {
                 path: '/home',
                 component: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
-                name: 'home',
+                name: 'Home',
                 meta: {
                     title: '首页',
                     icon: 'Eleme',

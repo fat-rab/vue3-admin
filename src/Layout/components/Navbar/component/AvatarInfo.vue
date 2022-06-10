@@ -24,7 +24,7 @@
 
 <script lang="ts" setup>
 import {useStore} from "vuex";
-import {UserMutationEnum} from "@/store/modules/user/mutations";
+import {UserMutationEnum} from "@/store/ts/user";
 import {useRoute, useRouter} from "vue-router";
 
 const router = useRouter()

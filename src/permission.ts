@@ -4,8 +4,8 @@ import {NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw} from "vue-
 import NProgress from "nprogress"
 import 'nprogress/nprogress.css'
 import {whiteList} from "@/setting"
-import {UserActionEnum} from "@/store/modules/user/actions";
-import {PermissionActionsEnum} from "@/store/modules/permission/actions"
+import {UserActionEnum} from "@/store/ts/user";
+import {PermissionActionsEnum} from "@/store/ts/permission"
 import {ElMessage} from "element-plus";
 
 

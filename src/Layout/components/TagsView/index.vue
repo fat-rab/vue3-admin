@@ -35,9 +35,8 @@
 import {computed, defineComponent, ref, watch} from "vue";
 import {initTagList, isActive} from "@/Layout/components/TagsView/composables";
 import {useStore} from "vuex";
-import {tagDetail} from "@/store/modules/tagsView/state";
+import {TagDetail,TagsViewMutationEnum} from "@/store/ts/tagsView";
 import {useRoute, useRouter} from "vue-router";
-import {tagsViewMutationEnum} from "@/store/modules/tagsView/mutations";
 import {constantModules} from "@/router";
 import variables from "@/styles/variables.module.scss"
 
@@ -51,7 +50,7 @@ export default defineComponent({
     let left = ref(0)
     let top = ref(0)
     let showMenu = ref(false)
-    let tagObj: tagDetail
+    let tagObj: TagDetail
     let affix = ref(true)
     initTagsView()
     const tagList = computed(() => store.state.tagsView.tagList)
@@ -70,7 +69,7 @@ export default defineComponent({
     function closeTag(path: string | undefined): void {
       if (!path) path = tagObj.path
       store.commit(
-          `tagsView/${tagsViewMutationEnum.DELETE_TAG}`,
+          `tagsView/${TagsViewMutationEnum.DELETE_TAG}`,
           path
       )
       if (path === currentRoute.path) {
@@ -81,16 +80,16 @@ export default defineComponent({
     function closeOtherTag(): void {
       const path = tagObj.path
       store.commit(
-          `tagsView/${tagsViewMutationEnum.DELETE_OTHER_TAG}`,
+          `tagsView/${TagsViewMutationEnum.DELETE_OTHER_TAG}`,
           path
       )
       if (currentRoute.path !== path) router.push(path)
     }
 
     function closeAllTag(): void {
-      store.commit(`tagsView/${tagsViewMutationEnum.DELETE_ALL_TAG}`)
+      store.commit(`tagsView/${TagsViewMutationEnum.DELETE_ALL_TAG}`)
       let jump = true
-      tagList.value.forEach((item: tagDetail) => {
+      tagList.value.forEach((item: TagDetail) => {
         if (item.path === currentRoute.path) jump = false
       })
       if (jump) router.push(tagList.value[0].path)
@@ -99,12 +98,12 @@ export default defineComponent({
     function initTagsView() {
       const routes = [...constantModules, ...store.state.permission.permissionRoutes]
       const tagsList = initTagList(routes)
-      store.commit(`tagsView/${tagsViewMutationEnum.SET_TAG_LIST}`, tagsList)
+      store.commit(`tagsView/${TagsViewMutationEnum.SET_TAG_LIST}`, tagsList)
       addTag()
     }
 
     function addTag() {
-      store.commit(`tagsView/${tagsViewMutationEnum.ADD_TAG_LIST}`, {
+      store.commit(`tagsView/${TagsViewMutationEnum.ADD_TAG_LIST}`, {
         path: currentRoute.path,
         title: currentRoute.meta?.title,
         query: currentRoute.query
@@ -115,7 +114,7 @@ export default defineComponent({
       router.replace({path: '/redirect' + tagObj.path, query: tagObj.query})
     }
 
-    function openMenu(tag: tagDetail, e: MouseEvent) {
+    function openMenu(tag: TagDetail, e: MouseEvent) {
       affix.value = tag.affix
       tagObj = tag
       let sideBarWidth = Number(variables.sideBarWidthNumber)

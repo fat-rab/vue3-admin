@@ -9,7 +9,7 @@
 export default {
   name: 'UserMessage',
   setup(){
-    console.log(1)
+    console.log(2)
   }
 }
 </script>

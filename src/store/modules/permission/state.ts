@@ -1,10 +1,4 @@
-import {AppRouteRecordRaw} from "@/router";
-import {RouteRecordName} from "vue-router";
-
-export interface PermissionState {
-    permissionRoutes: Array<AppRouteRecordRaw>
-    cachedRoutes: Array<RouteRecordName>
-}
+import {PermissionState} from "../../ts/permission"
 
 const state: PermissionState = {
     permissionRoutes: [],

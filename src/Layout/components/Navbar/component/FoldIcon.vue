@@ -10,7 +10,7 @@
 <script>
 import {computed} from "vue";
 import {useStore} from "vuex";
-import {SettingMutationEnum} from "@/store/modules/setting/mutations";
+import {SettingMutationEnum} from "@/store/ts/setting";
 
 export default {
   name: "FoldIcon",

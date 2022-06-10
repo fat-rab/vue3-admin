@@ -1,7 +1,7 @@
 import axios, {AxiosRequestConfig, AxiosResponse} from 'axios'
 import {getToken, TokenKey} from '@/utils/auth'
 import {ElMessage, ElMessageBox} from "element-plus";
-import {UserActionEnum} from "@/store/modules/user/actions";
+import {UserActionEnum} from "@/store/ts/user";
 import store from '@/store'
 
 

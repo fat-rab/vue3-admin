@@ -1,4 +1,4 @@
-export interface loginQuery {
+export interface LoginQuery {
     redirect?: string
     [key: string]: any
 }

@@ -1,17 +1,6 @@
-export interface tagDetail {
-    path: string
-    title: string
-    affix: boolean
-    query?: {
-        [key: string]: any
-    }
-}
+import {TagsViewState} from "../../ts/tagsView";
 
-export interface tagsViewState {
-    tagList: Array<tagDetail>
-}
-
-const state: tagsViewState = {
+const state: TagsViewState = {
     tagList: []
 }
 export default state
