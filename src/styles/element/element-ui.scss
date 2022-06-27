@@ -1,488 +1,105 @@
 // 覆盖部分element-ui组件的样式
 @import "../variables.module";
 
-.el-breadcrumb__inner,
-.el-breadcrumb__inner a {
-  font-weight: 400 !important;
-}
-
-.el-upload {
-  input[type="file"] {
-    display: none !important;
-  }
-}
-
-.el-upload__input {
-  display: none;
-}
-
-.cell {
-  .el-tag {
-    margin-right: 0;
-  }
-}
-
-.small-padding {
-  .cell {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-}
-
-.fixed-width {
-  .el-button--mini {
-    padding: 8px 12px;
-    min-width: 60px;
-  }
-}
-
-.status-col {
-  .cell {
-    padding: 0 12px;
-    text-align: center;
-
-    .el-tag {
-      margin-right: 0;
-    }
-  }
-}
-
-
-// refine element ui upload
-.upload-container {
-  .el-upload {
-    width: 100%;
-
-    .el-upload-dragger {
-      width: 100%;
-      height: 200px;
-    }
-  }
-}
-
-// dropdown
-.el-dropdown {
-
-  .el-dropdown-menu {
-    a {
-      display: block
-    }
-  }
-
-  .el-dropdown-link {
-    cursor: pointer;
-    color: $mainColor !important;
-    font-size: 12px;
-  }
-
-  .el-icon-arrow-down {
-    font-size: 12px;
-  }
-
-}
-
+//el-dropdown-menu__item 悬浮背景色修改
 .el-dropdown-menu {
   .el-dropdown-menu__item {
-    font-size: 12px;
-  }
-}
-
-// fix date-picker ui bug in filter-item
-.el-range-editor.el-input__inner {
-  display: inline-flex !important;
-}
-
-// to fix el-date-picker css style
-.el-range-separator {
-  box-sizing: content-box;
-}
-
-//input
-.el-input {
-  .el-input__inner {
-    height: 32px;
-  }
-}
-
-
-input {
-  font-size: 12px !important;
-}
-
-//textarea
-.el-textarea__inner {
-  font-size: 12px !important;
-}
-
-//textarea disabled
-.el-textarea {
-  &.is-disabled {
-    .el-textarea__inner {
-      background-color: #ffffff;
-      color: #606266;
-    }
-  }
-
-}
-
-textarea[readonly] {
-  cursor: not-allowed;
-}
-
-// input-readonly
-input[readonly] {
-  cursor: not-allowed;
-}
-
-// input的框中的图标，select 的向下的箭头的图标
-.el-input__suffix {
-  i {
-    line-height: 32px;
-  }
-}
-
-.el-select--mini {
-  input {
-    height: 28px !important;
-  }
-
-  .el-input__suffix {
-    i {
-      line-height: 28px;
+    &:focus {
+      background-color: rgba(10, 111, 235, 6%);
     }
   }
 }
 
-// el-date-picker
-.el-range-editor {
-  padding: 0 10px !important;
-  height: 32px !important;
-}
-
-//select
-.el-select-dropdown__wrap {
-  .el-select-dropdown__item {
-    font-size: 12px;
-  }
-}
-
-//select/input-disabled
-.is-disabled {
-  .el-input__inner {
-    background-color: #fff !important;
-    color: #606266 !important;
-    cursor: not-allowed;
-  }
-}
-
-
-//radio
-.el-radio {
-  .el-radio__label {
-    font-size: 12px;
-  }
-
-  //radio-disabled
-  .el-radio__input.is-disabled {
-    & + span.el-radio__label {
-      color: #606266;
-    }
-  }
-
-  .el-radio__input.is-disabled.is-checked {
-    & + .el-radio__label {
-      color: $mainColor;
-    }
-  }
-
-  .el-radio__input.is-disabled {
-    .el-radio__inner {
-      background: #fff;
-    }
-  }
-
-  .el-radio__input.is-disabled.is-checked {
-    .el-radio__inner {
-      border-color: $mainColor;
-      background: $mainColor;
-    }
-  }
-
-  .el-radio__input.is-disabled.is-checked {
-    .el-radio__inner::after {
-      background-color: #fff;
-    }
-  }
-}
-
-//raids-button disable
-.el-radio-button {
-  &.is-disabled {
-    .el-radio-button__inner {
-      color: $mainFontColor;
-      background-color: #ffffff;
-
-    }
-
-    &.is-active {
-      .el-radio-button__inner {
-        color: #ffffff;
-        background-color: $mainColor;
-
-      }
-    }
-
-  }
-}
-
-
-//checkbox
-.el-checkbox {
-  .el-checkbox__label {
-    font-size: 12px;
-  }
-
-  //checkout-disabled
-  .el-checkbox__input.is-disabled {
-    & + span.el-checkbox__label {
-      color: #606266;
-      cursor: not-allowed;
-    }
-  }
-
-  .el-checkbox__input.is-disabled {
-    .el-checkbox__inner {
-      background-color: #fff;
-    }
-  }
-
-  .el-checkbox__input.is-disabled.is-checked {
-    .el-checkbox__inner {
-      background-color: $mainColor;
-      border-color: $mainColor;
-    }
-  }
-
-  .el-checkbox__input.is-disabled.is-checked {
-    .el-checkbox__inner::after {
-      border-color: #fff;
-    }
-  }
-}
-
-// 更改样式
-// to fixed https://github.com/ElemeFE/element/issues/2461
-//dialog
+//el-dialog
 .el-dialog {
-  transform: none;
-  left: 0;
-  position: relative;
-  margin: 0 auto;
-  overflow: hidden;
-
   .el-dialog__header {
-    background-color: $bgColor;
-    padding: 12px 20px;
+    height: 48px;
+    padding: 13px 24px;
+    margin: 0;
+    border-bottom: 1px solid $borderColor;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
 
-    span {
+    .el-dialog__title {
       font-size: 16px;
+      font-weight: 500;
+      color: $mainFontColor;
     }
 
     .el-dialog__headerbtn {
-      top: 18px
+      top: 0;
+
+      .el-icon {
+        color: $mainFontColor;
+        font-weight: 500;
+      }
     }
   }
 
   .el-dialog__body {
-    max-height: 75vh;
-    overflow-y: auto;
+    padding: 24px 32px 0 24px;
   }
 
   .el-dialog__footer {
-    width: 96%;
-    margin: 0 auto;
-    padding: 20px;
-    border-top: 1px solid #e5e7ed;
-    text-align: center;
+    margin-top: 32px;
+    padding: 0 24px 24px 0;
   }
 }
 
-// drawer
-.el-drawer__header {
-  background-color: $bgColor;
-  padding: 12px 20px;
-  color: $mainFontColor;
-
-  span {
-    font-size: 16px;
-  }
-}
-
-.el-drawer__body {
-  padding: 0 12px;
-}
-
-// message-box
-.el-message-box {
-  .el-message-box__header {
-    background-color: $bgColor;
-  }
-
-  .el-message-box__content {
-    display: flex;
-    justify-content: center;
-    font-size: 12px;
-  }
-
-  .el-message-box__btns {
-    padding-top: 12px;
-    width: 90%;
-    margin: 0 auto;
-    border-top: 1px solid #e5e7ed;
-    text-align: center;
-  }
-}
-
-//table
-table {
-  font-size: 12px;
-
-  thead {
-    tr {
-      th {
-        background: #edf1f5 !important;
-        padding: 8px 0 !important;
-        color: #303133;
-        font-weight: 500;
-
-        .cell {
-          padding: 0 20px !important;
-          line-height: 24px !important;
-        }
-      }
-    }
-  }
-
-  tbody {
-    td {
-      font-weight: 400;
-      color: #2B3F57;
-
-      .cell {
-        padding: 0 20px !important;
-      }
-
-      .el-button {
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-      }
-
-    }
-  }
-
-
-  th, td {
-    border-bottom: 1px solid #E5E7ED !important;
-    border-right: 1px solid #E5E7ED !important;
-  }
-}
-
-// table 嵌套在el-form-item 中的时候，line-height会受到影响，这边固定一下line-height
-.el-form-item__content {
-  thead {
-    line-height: 24px;
-  }
-}
-
-//form
-.el-form {
-  .el-form-item {
-    .el-form-item__label {
-      font-size: 12px;
-      color: $mainFontColor;
-      font-weight: 500;
-    }
-
-    .el-form-item__content {
-      font-size: 12px;
-      color: $mainFontColor;
-    }
-  }
-
-  //自定义样式，用于table的搜索条件的el-form-item
-  .search-button-box {
-    .el-form-item__content {
-      margin-left: 0 !important;
-      text-align: center;
-    }
-  }
-}
 
 //tab
 .el-tabs {
   .el-tabs__item {
-    font-size: 12px;
-  }
-}
+    padding: 0 24px;
+    font-weight: 400;
+    height: 56px;
+    line-height: 56px;
 
-//pagination
-.el-pagination * {
-  font-size: 12px !important;
-}
-
-
-//card
-.el-card {
-  &.my-card {
-    border: none;
-
-    .el-card__header {
-      font-size: 24px;
-      font-weight: bold;
+    &.is-active {
+      font-weight: 500;
     }
   }
 }
 
-//button
-.el-button--small {
-  padding: 8px 12px !important;
+//el-link
+.el-link {
+  font-weight: 400;
 }
 
-// 多个button之间的间隔
-.el-button + .el-button {
-  margin-left: 12px;
-}
+//el-tabs
+.el-tabs {
+  .el-tabs__header {
+    font-size: 16px;
 
-.el-button + .el-dropdown {
-  padding: 0;
-}
+    .el-tabs__nav-wrap {
+      &::after {
+        height: 1px;
+        background-color: $borderColor;
+      }
 
-//次联选择器
-.el-cascader * {
-  font-size: 12px;
-}
+      .el-tabs__nav-scroll {
+        .el-tabs__nav {
+          .el-tabs__active-bar {
+            //height: 1px;
+          }
 
-.el-cascader__dropdown * {
-  font-size: 12px;
-}
-
-//el-alert
-.el-alert {
-  font-size: 12px;
-  line-height: 18px;
-
-  .el-alert__content, .el-alert__title {
-    font-size: 12px;
+          .el-tabs__item {
+            font-size: 16px;
+          }
+        }
+      }
+    }
   }
 }
 
-//el-switch
-// disabled状态的透明度
-.el-switch.is-disabled {
-  opacity: 1
-}
 
-//el-breadcrumb
-.el-breadcrumb {
-  font-size: 12px !important;
+//el-form
+.el-form {
+  .el-form-item {
+    .el-form-item__label {
+      padding: 0;
+    }
+  }
+
 }

@@ -22,13 +22,16 @@ router.beforeEach(async(to: RouteLocationNormalized, form: RouteLocationNormaliz
                 try {
                     await store.dispatch(`user/${UserActionEnum.GET_USER_INFO}`)
                     const roles = store.state.user.roles
+                    if (roles.length === 0) {
+                        throw new Error('')
+                    }
                     await store.dispatch(`permission/${PermissionActionsEnum.GET_PERMISSION_ROUTES}`, roles)
                     store.state.permission.permissionRoutes.forEach((item) => {
                         router.addRoute(item as RouteRecordRaw)
                     })
                     // 不直接使用next({...to, replace: true}),避免在动态路由的页面刷新浏览器出现警告并且跳转到404页面
                     if (to.path == '/404' && to.redirectedFrom != undefined) {
-                        next({path: to.redirectedFrom?.fullPath, replace: true})
+                        next({path: to.redirectedFrom?.fullPath, query: to.redirectedFrom?.query, replace: true})
                     } else {
                         next({...to, replace: true})
                     }

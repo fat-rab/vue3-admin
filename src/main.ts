@@ -3,8 +3,12 @@ import App from './App.vue'
 import router from "./router/index"
 import store from "./store/index"
 
-import './styles/element/index.scss'
-import ElementPlus from 'element-plus'
+// 开启自动引入，不需要全部引入
+// import './styles/element/index.scss'
+// import ElementPlus from 'element-plus'
+
+// 如果需要使用ElMessage 还是需要引入
+import "element-plus/theme-chalk/src/message.scss"
 
 import "./styles/index.scss"
 import request from "./utils/request"
@@ -18,7 +22,8 @@ import * as Icons from '@element-plus/icons'
 //     mockXHR()
 // }
 mockXHR()
-const app = createApp(App).use(router).use(store).use(ElementPlus)
+
+const app = createApp(App).use(router).use(store)
 // 全局注册icon组件
 Object.keys(Icons).forEach(key => {
     app.component(key, Icons[key])

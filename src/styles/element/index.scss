@@ -1,6 +1,6 @@
 $--colors: (
         "primary": (
-                "base": #3760F4,
+                "base": #0A6FEB,
         ),
         "success": (
                 "base": #13ce66,
@@ -14,19 +14,60 @@ $--colors: (
         "error": (
                 "base": #ed5858,
         ),
-  //"info": (
-  //        "base": #42b8dd,
-  //),
+        "info": (
+                "base": #909399,
+        ),
+);
+// 字体颜色
+$text--colors: (
+        'primary': #303133,
+        'regular': #606266,
+        'secondary': #909399,
+        'placeholder': #bfc2cc,
+);
+$table--colors: (
+        'border-color': var(--el-border-color-lighter),
+        'border': 1px solid var(--el-table-border-color),
+        'text-color': var(--el-text-color-regular),
+        'header-text-color':#606266, //修改了表头文字颜色
+        'row-hover-bg-color': var(--el-bg-color),
+        'current-row-bg-color': var(--el-color-primary-light-9),
+        'header-bg-color': var(--el-color-white),
+        'fixed-box-shadow': 0 0 10px rgba(0, 0, 0, 0.12),
+        'bg-color': var(--el-color-white),
+        'tr-bg-color': var(--el-color-white),
+        'expanded-cell-bg-color': var(--el-color-white),
+);
+// 边框颜色
+$border--color: (
+        'base': #dcdfe6,
+        'light': #E5E7ED,
+        'lighter': #ebeef5,
+        'extra-light': #f2f6fc,
 );
 
+// 组件size
+$common--component--size: (
+        'large': 42px,
+        'default': 32px,
+        'small': 24px,
+);
 @forward "element-plus/theme-chalk/src/common/var" with
   (
     // do not use same name, it will override.
     $colors: $--colors,
+    $text-color:$text--colors,
+    $border-color:$border--color,
+    $common-component-size:$common--component--size,
+    $table:$table--colors
   );
 
-// if you want to import all
-@use "element-plus/theme-chalk/src/index" as *;
+// 引入所有element 样式
+// @use "element-plus/theme-chalk/src/index" as *;
 
+// @use "element-plus/theme-chalk/src/dark/css-vars.scss" as *;
+//@import "element-ui";
 // You can comment it to hide debug info.
 // @debug $--colors;
+
+
