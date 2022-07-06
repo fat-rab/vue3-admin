@@ -32,7 +32,7 @@ import {reactive, ref} from "vue";
 import {Lock, User} from '@element-plus/icons-vue'
 import {ElForm} from "element-plus";
 import {useStore} from "vuex";
-import {UserActionEnum} from "@/store/ts/user";
+import {UserActionEnum} from "@/ts/store/user";
 import {useRoute, useRouter} from "vue-router";
 import {LoginQuery} from "@/views/login/TS";
 

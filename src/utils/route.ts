@@ -1,5 +1,5 @@
 import {hasPermission} from "@/utils/permission";
-import {AppRouteRecordRaw} from "@/router";
+import {AppRouteRecordRaw} from "@/ts/router";
 import {RouteRecordName} from "vue-router";
 
 export function filterRoute(routes: Array<AppRouteRecordRaw>, roles: Array<string>): Array<AppRouteRecordRaw> {

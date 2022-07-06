@@ -1,4 +1,4 @@
-import {AppRouteRecordRaw} from "@/router";
+import {AppRouteRecordRaw} from "@/ts/router";
 import {RouteRecordName} from "vue-router";
 
 export interface PermissionState {

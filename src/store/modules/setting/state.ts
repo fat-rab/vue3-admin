@@ -1,4 +1,4 @@
-import {SettingState} from "../../ts/setting";
+import {SettingState} from "@/ts/store/setting";
 
 
 const state: SettingState = {

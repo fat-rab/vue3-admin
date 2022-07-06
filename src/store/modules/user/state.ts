@@ -1,5 +1,5 @@
 import {getToken} from "@/utils/auth";
-import {UserState} from "../../ts/user"
+import {UserState} from "@/ts/store/user"
 
 const state: UserState = {
     token: getToken() || '',

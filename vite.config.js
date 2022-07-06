@@ -17,7 +17,7 @@ export default defineConfig({
         // 自动引入自定义组件
         Components({
             extensions: ['vue', 'md'],
-            // allow auto import and register components used in markdown
+            // 自动引入和注册组件
             include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
             resolvers: [
                 //element 组件按需加载
@@ -64,8 +64,8 @@ export default defineConfig({
                         if (arr.includes('axios')) {
                             return 'axios'
                         }
-                        if (arr.includes('element')) {
-                            return 'element'
+                        if (arr.includes('echarts')) {
+                            return 'echarts'
                         }
                     }
                 }

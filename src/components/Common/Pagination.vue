@@ -50,7 +50,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/variables.module";
+@import "../../styles/variables";
 
 .el-pagination {
   display: flex;

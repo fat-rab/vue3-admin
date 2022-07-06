@@ -8,14 +8,14 @@ import store from "./store/index"
 // import ElementPlus from 'element-plus'
 
 // 如果需要使用ElMessage 还是需要引入
-import "element-plus/theme-chalk/src/message.scss"
+// import "element-plus/theme-chalk/src/message.scss"
 
 import "./styles/index.scss"
 import request from "./utils/request"
 import "./permission"
 import {mockXHR} from "../mock"
 
-import * as Icons from '@element-plus/icons'
+import * as Icons from '@element-plus/icons-vue'
 
 
 // if (process.env.NODE_ENV === 'production') {

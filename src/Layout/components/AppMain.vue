@@ -19,7 +19,7 @@ import {useRoute} from "vue-router";
 import {computed} from "vue";
 import {showTagsView} from "@/setting"
 import {useStore} from "vuex";
-import {PermissionMutationEnum} from "@/store/ts/permission";
+import {PermissionMutationEnum} from "@/ts/store/permission";
 
 export default {
   name: 'AppMain',
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/variables.module";
+@import "../../styles/variables";
 
 .app-main {
   position: absolute;

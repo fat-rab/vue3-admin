@@ -1,4 +1,4 @@
-import {PermissionState} from "../../ts/permission"
+import {PermissionState} from "@/ts/store/permission"
 
 const state: PermissionState = {
     permissionRoutes: [],

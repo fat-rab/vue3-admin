@@ -1,5 +1,5 @@
 import {MutationTree} from "vuex";
-import {SettingState, Mutations, SettingMutationEnum} from "../../ts/setting"
+import {SettingState, Mutations, SettingMutationEnum} from "@/ts/store/setting"
 
 
 //除了需要符合vuex规定的MutationTree<UserState>接口要求，还需要符合上述Mutations规定的函数

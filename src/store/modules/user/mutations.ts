@@ -1,5 +1,5 @@
 import {MutationTree} from "vuex";
-import {Mutations, UserMutationEnum, UserState} from "../../ts/user"
+import {Mutations, UserMutationEnum, UserState} from "@/ts/store/user"
 import {resetRouter} from "@/router";
 import {removeToken} from "@/utils/auth";
 

@@ -1,8 +1,8 @@
-import {Mutations} from "./mutations"
+import {Mutations} from "@/ts/store/setting"
 import {ActionContext, ActionTree} from "vuex";
-import {UserState} from "../../ts/user";
+import {UserState} from "@/ts/store/user";
 import {RootState} from "@/store";
-import {SettingState} from "../../ts/setting";
+import {SettingState} from "@/ts/store/setting";
 
 export enum UserActionEnum {
 

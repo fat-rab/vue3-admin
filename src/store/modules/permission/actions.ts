@@ -1,8 +1,9 @@
-import {PermissionState, Mutations, PermissionMutationEnum, PermissionActionsEnum} from "../../ts/permission";
+import {PermissionState, Mutations, PermissionMutationEnum, PermissionActionsEnum} from "@/ts/store/permission";
 
 import {ActionContext, ActionTree} from "vuex";
 import {RootState} from "@/store";
-import {AppRouteRecordRaw, asyncRoutes} from "@/router"
+import {asyncRoutes} from "@/router"
+import {AppRouteRecordRaw} from "@/ts/router"
 import {filterRoute} from "@/utils/route"
 
 

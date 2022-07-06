@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/variables.module";
+@import "../styles/variables";
 
 .app-wrapper {
   width: 100%;

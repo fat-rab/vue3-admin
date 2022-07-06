@@ -10,7 +10,7 @@
 <script>
 import {computed} from "vue";
 import {useStore} from "vuex";
-import {SettingMutationEnum} from "@/store/ts/setting";
+import {SettingMutationEnum} from "@/ts/store/setting";
 
 export default {
   name: "FoldIcon",
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../styles/variables.module";
+@import "../../../../styles/variables";
 
 .icon-container {
   height: $navbarHeight;

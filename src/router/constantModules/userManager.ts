@@ -1,5 +1,5 @@
 import Layout from "@/Layout/index.vue"
-import {AppRouteRecordRaw} from "@/router";
+import {AppRouteRecordRaw} from "@/ts/router";
 import {markRaw} from "vue";
 
 const userManagerRouter: Array<AppRouteRecordRaw> = [

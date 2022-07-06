@@ -23,7 +23,7 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/variables.module";
+@import "../../styles/variables";
 
 .page-title-container {
   width: 100%;

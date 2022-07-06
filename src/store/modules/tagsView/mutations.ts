@@ -1,4 +1,4 @@
-import {TagDetail, TagsViewState,TagsViewMutationEnum,TagsViewMutation} from "../../ts/tagsView";
+import {TagDetail, TagsViewState,TagsViewMutationEnum,TagsViewMutation} from "@/ts/store/tagsView";
 import {MutationTree} from "vuex";
 import {judgeArr} from "@/utils/array";
 

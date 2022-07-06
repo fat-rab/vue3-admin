@@ -1,5 +1,5 @@
 import state from "@/store/modules/user/state";
-import {UserState} from "@/store/ts/user";
+import {UserState} from "@/ts/store/user";
 import mutations from "@/store/modules/user/mutations";
 import actions from "@/store/modules/user/actions";
 import {Module} from "vuex";

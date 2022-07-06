@@ -1,11 +1,11 @@
 import {useRoute} from "vue-router";
-import {AppRouteRecordRaw} from "@/router";
-import {tagDetail} from "@/store/modules/tagsView/state";
+import {AppRouteRecordRaw} from "@/ts/router";
+import {TagDetail} from "@/ts/store/tagsView";
 
 
 // 获取所有固定在tagsView中的路由
 export function initTagList(routes: Array<AppRouteRecordRaw>) {
-    const list: Array<tagDetail> = []
+    const list: Array<TagDetail> = []
     routes.forEach((item) => {
         if (item.meta?.affix) {
             list.push({

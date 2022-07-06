@@ -35,10 +35,10 @@
 import {computed, defineComponent, ref, watch} from "vue";
 import {initTagList, isActive} from "@/Layout/components/TagsView/composables";
 import {useStore} from "vuex";
-import {TagDetail,TagsViewMutationEnum} from "@/store/ts/tagsView";
+import {TagDetail,TagsViewMutationEnum} from "@/ts/store/tagsView";
 import {useRoute, useRouter} from "vue-router";
 import {constantModules} from "@/router";
-import variables from "@/styles/variables.module.scss"
+import variables from "@/styles/variables.scss"
 
 export default defineComponent({
   name: "TagsView",
@@ -157,7 +157,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "../../../styles/variables.module";
+@import "../../../styles/variables";
 
 .contextmenu {
   background: #fff;

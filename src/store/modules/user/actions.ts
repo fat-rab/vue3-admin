@@ -1,5 +1,5 @@
 import {ActionContext, ActionTree} from "vuex";
-import {UserState, UserMutationEnum, Mutations, UserActionEnum} from "../../ts/user"
+import {UserState, UserMutationEnum, Mutations, UserActionEnum} from "@/ts/store/user"
 import {RootState} from "@/store";
 import {getInfo, login} from "@/apis/user";
 import {setToken} from "@/utils/auth";

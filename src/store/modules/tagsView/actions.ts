@@ -1,6 +1,6 @@
-import {TagsViewMutation, TagsViewMutationEnum,TagsViewActionEnum} from "../../ts/tagsView";
+import {TagsViewMutation, TagsViewMutationEnum,TagsViewActionEnum} from "@/ts/store/tagsView";
 import {RootState} from "@/store";
-import {TagDetail, TagsViewState} from "../../ts/tagsView";
+import {TagDetail, TagsViewState} from "@/ts/store/tagsView";
 import {ActionContext, ActionTree} from "vuex";
 
 

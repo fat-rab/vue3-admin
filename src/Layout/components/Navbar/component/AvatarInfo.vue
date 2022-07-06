@@ -2,7 +2,7 @@
   <div class="avatar-container">
     <el-dropdown trigger="click" @command="handleCommand">
       <span class="el-dropdown-link">
-        <img class="user-avatar" :src="userInfo.avatar+'?imageView2/1/w/80/h/80'">
+        <img class="user-avatar" :src="userInfo.avatar+'?imageView2/1/w/80/h/80'" alt="头像">
         <span class="user-name">{{ userInfo.name }}</span>
         <el-icon class="arrow-down">
           <arrow-down />
@@ -24,7 +24,7 @@
 
 <script lang="ts" setup>
 import {useStore} from "vuex";
-import {UserMutationEnum} from "@/store/ts/user";
+import {UserMutationEnum} from "@/ts/store/user";
 import {useRoute, useRouter} from "vue-router";
 
 const router = useRouter()
@@ -36,14 +36,24 @@ const handleCommand = (command: string | number | object) => {
     //TODO
   }
   if (command === 'loginOut') {
+    const query = {}
+    Object.keys(route.query).forEach((item) => {
+      query[item] = route.query[item]
+    })
     store.commit(`user/${UserMutationEnum.RESET_TOKEN}`)
-    router.push(`login?redirect=${route.fullPath}`)
+    router.push({
+      path: '/login',
+      query: {
+        redirect: route.path,
+        ...query
+      }
+    })
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../styles/variables.module";
+@import "../../../../styles/variables";
 
 .avatar-container {
   float: right;

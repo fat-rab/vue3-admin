@@ -1,4 +1,4 @@
-import {AppRouteRecordRaw} from "@/router";
+import {AppRouteRecordRaw} from "@/ts/router";
 import {markRaw} from "vue";
 import Layout from "@/Layout/index.vue";
 

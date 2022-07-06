@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import {defineComponent, PropType} from "vue";
-import {AppRouteRecordRaw} from "@/router";
+import {AppRouteRecordRaw} from "@/ts/router";
 import {judgeShowingChild} from "@/utils/route";
 import SidebarIcon from "./SidebarIcon.vue"
 import SidebarItemLink from "@/Layout/components/Sidebar/SidebarItemLink.vue";

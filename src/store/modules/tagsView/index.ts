@@ -3,7 +3,7 @@ import mutations from "./mutations"
 import actions from "./actions";
 import {Module} from "vuex";
 import {RootState} from "@/store";
-import {TagsViewState} from "../../ts/tagsView";
+import {TagsViewState} from "@/ts/store/tagsView";
 
 const tagsViewStore: Module<TagsViewState, RootState> = {
     namespaced: true,

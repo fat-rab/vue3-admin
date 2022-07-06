@@ -225,7 +225,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "../../../styles/variables.module";
+@import "../../../styles/variables";
 
 .table-container {
   width: 100%;
