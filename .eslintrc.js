@@ -18,9 +18,15 @@ module.exports = {
         ecmaVersion: 2020
     },
     rules: {
-        "vue/component-name-in-template-casing": ["error", "kebab-case", {
-            "registeredComponentsOnly": false,
-            "ignores": []
+        'quotes': ['error', 'single'],
+        'semi': ['error', 'never'],
+        'vue/component-name-in-template-casing': ['error', 'kebab-case', {
+            'registeredComponentsOnly': false,
+            'ignores': []
+        }],
+        'vue/v-on-event-hyphenation': ['warn', 'always', {
+            'autofix': true,
+            'ignore': []
         }],
         'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -57,16 +63,16 @@ module.exports = {
         ],
         'vue/attribute-hyphenation': 'off',
         'vue/custom-event-name-casing': 'off',
-        "vue/max-attributes-per-line": ["error", {
-            "singleline": {
-                "max": 4
+        'vue/max-attributes-per-line': ['error', {
+            'singleline': {
+                'max': 4
             },
-            "multiline": {
-                "max": 1
+            'multiline': {
+                'max': 1
             }
         }],
-        "vue/multi-word-component-names": ["off", {
-            "ignores": ["template"]
+        'vue/multi-word-component-names': ['off', {
+            'ignores': ['template']
         }]
     },
     overrides: [
