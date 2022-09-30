@@ -5,7 +5,7 @@ import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
 import ElementPlus from 'unplugin-element-plus/vite'
 
 const {resolve} = require('path')
-
+//因为项目中几乎不使用element图标，所以暂时没有使用unplugin-icons自动引入图标
 export default defineConfig({
     plugins: [
         vue(),
