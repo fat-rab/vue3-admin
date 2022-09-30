@@ -57,15 +57,17 @@ export default defineComponent({
     let showMenu = ref(false)
     let tagObj: TagDetail
     let affix = ref(true)
+
     initTagsView()
     const tagList = computed(() => tagsViewStore.tagList)
-
+    // 监听路由path
     watch(() => currentRoute.path, () => {
       if (currentRoute.path.indexOf('/redirect') > -1) return
       addTag()
     }, {
       immediate: true
     })
+    // 监听右键菜单打开关闭
     watch(() => showMenu.value, (value) => {
       // 点击空白处，关闭右键菜单
       if (value) {

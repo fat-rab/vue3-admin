@@ -30,7 +30,6 @@ export const useTagsViewStore = defineStore('tagsView', {
         [TagsViewActionEnum.DELETE_OTHER_TAG](payload: string): void {
             const list: Array<TagDetail> = []
             this.tagList.forEach((item) => {
-                console.log(item)
                 if (item.path === payload || item.affix) list.push(item)
             })
             this.tagList = list
