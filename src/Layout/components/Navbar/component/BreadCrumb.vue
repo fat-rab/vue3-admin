@@ -13,12 +13,12 @@
 </template>
 
 <script lang="ts">
-import {RouteLocationMatched, useRoute, useRouter} from "vue-router";
-import {ref, UnwrapRef, watch} from "vue";
-import {getBreadCrumbList, pathCompile} from "@/Layout/components/Navbar/composables/BreadCrumb";
+import {RouteLocationMatched, useRoute, useRouter} from 'vue-router'
+import {ref, UnwrapRef, watch} from 'vue'
+import {getBreadCrumbList, pathCompile} from '@/Layout/components/Navbar/composables/BreadCrumb'
 
 export default {
-  name: "BreadCrumb",
+  name: 'BreadCrumb',
   components: {},
   setup() {
     const currentRoute = useRoute()

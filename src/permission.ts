@@ -1,32 +1,35 @@
-import store from "@/store/index"
-import router from "@/router/index"
-import {NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw} from "vue-router";
-import NProgress from "nprogress"
+import router from '@/router/index'
+import {NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw} from 'vue-router'
+import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import {whiteList} from "@/setting"
-import {UserActionEnum} from "@/ts/store/user";
-import {PermissionActionsEnum} from "@/ts/store/permission"
-import {ElMessage} from "element-plus";
-
+import {whiteList} from '@/setting'
+import {UserActionEnum} from '@/ts/store/user'
+import {PermissionActionsEnum} from '@/ts/store/permission'
+import {ElMessage} from 'element-plus'
+import {getToken} from '@/utils/auth'
+import {useUserStore} from '@/store/user'
+import {usePermissionStore} from '@/store/permission'
 
 NProgress.configure({showSpinner: false}) //进度环隐藏
 
 router.beforeEach(async(to: RouteLocationNormalized, form: RouteLocationNormalized, next: NavigationGuardNext) => {
     NProgress.start()
-    if (store.state.user.token) {
-        if (to.path === "/login") {
-            next({path: "/"})
+    if (getToken()) {
+        if (to.path === '/login') {
+            next({path: '/'})
             NProgress.done()
         } else {
-            if (store.state.user.roles.length === 0) {
+            const userStore = useUserStore()
+            const permissionStore = usePermissionStore()
+            if (userStore.roles.length === 0) {
                 try {
-                    await store.dispatch(`user/${UserActionEnum.GET_USER_INFO}`)
-                    const roles = store.state.user.roles
+                    await userStore[UserActionEnum.GET_USER_INFO]()
+                    const roles = userStore.roles
                     if (roles.length === 0) {
                         throw new Error('')
                     }
-                    await store.dispatch(`permission/${PermissionActionsEnum.GET_PERMISSION_ROUTES}`, roles)
-                    store.state.permission.permissionRoutes.forEach((item) => {
+                    await permissionStore[PermissionActionsEnum.GET_PERMISSION_ROUTES](roles)
+                    permissionStore.permissionRoutes.forEach((item) => {
                         router.addRoute(item as RouteRecordRaw)
                     })
                     // 避免退出系统，使用权限小于之前退出账号的账号再次登录，重定向到之前退出的没有访问权限的页面时候报错
@@ -41,7 +44,7 @@ router.beforeEach(async(to: RouteLocationNormalized, form: RouteLocationNormaliz
                         }
                     }
                 } catch (err) {
-                    await store.dispatch(`user/${UserActionEnum.RESET_TOKEN}`)
+                    await userStore[UserActionEnum.RESET_TOKEN]()
                     ElMessage({
                         type: 'error',
                         message: '该账号没有权限访问此页面,请更换账号'

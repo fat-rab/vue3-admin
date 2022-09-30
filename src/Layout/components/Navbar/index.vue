@@ -8,12 +8,12 @@
 
 <script>
 
-import FoldIcon from "./component/FoldIcon.vue"
-import BreadCrumb from "./component/BreadCrumb.vue"
-import AvatarInfo from "./component/AvatarInfo.vue"
+import FoldIcon from './component/FoldIcon.vue'
+import BreadCrumb from './component/BreadCrumb.vue'
+import AvatarInfo from './component/AvatarInfo.vue'
 
 export default {
-  name: "Navbar",
+  name: 'Navbar',
   components: {
     FoldIcon,
     BreadCrumb,

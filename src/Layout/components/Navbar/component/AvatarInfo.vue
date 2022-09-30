@@ -2,8 +2,8 @@
   <div class="avatar-container">
     <el-dropdown trigger="click" @command="handleCommand">
       <span class="el-dropdown-link">
-        <img class="user-avatar" :src="userInfo.avatar+'?imageView2/1/w/80/h/80'" alt="头像">
-        <span class="user-name">{{ userInfo.name }}</span>
+        <img class="user-avatar" :src="userStore.avatar+'?imageView2/1/w/80/h/80'" alt="头像">
+        <span class="user-name">{{ userStore.name }}</span>
         <el-icon class="arrow-down">
           <arrow-down />
         </el-icon>
@@ -14,7 +14,7 @@
             修改密码
           </el-dropdown-item>
           <el-dropdown-item command="loginOut">
-            退出登陆
+            退出登录
           </el-dropdown-item>
         </el-dropdown-menu>
       </template>
@@ -23,14 +23,13 @@
 </template>
 
 <script lang="ts" setup>
-import {useStore} from "vuex";
-import {UserMutationEnum} from "@/ts/store/user";
-import {useRoute, useRouter} from "vue-router";
+import {UserActionEnum} from '@/ts/store/user'
+import {useRoute, useRouter} from 'vue-router'
+import {useUserStore} from '@/store/user'
 
 const router = useRouter()
 const route = useRoute()
-const store = useStore()
-const userInfo = store.state.user
+const userStore = useUserStore()
 const handleCommand = (command: string | number | object) => {
   if (command === 'editPassword') {
     //TODO
@@ -40,7 +39,7 @@ const handleCommand = (command: string | number | object) => {
     Object.keys(route.query).forEach((item) => {
       query[item] = route.query[item]
     })
-    store.commit(`user/${UserMutationEnum.RESET_TOKEN}`)
+    userStore[UserActionEnum.RESET_TOKEN]()
     router.push({
       path: '/login',
       query: {

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "SysTest2",
+  name: 'SysTest2',
 
 }
 </script>

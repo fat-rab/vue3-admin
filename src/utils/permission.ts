@@ -1,4 +1,4 @@
-import {AppRouteRecordRaw} from "@/ts/router";
+import {AppRouteRecordRaw} from '@/ts/router'
 
 export const hasPermission = (roles: Array<string>, route: AppRouteRecordRaw) => {
     if (route.meta && route.meta.roles) {

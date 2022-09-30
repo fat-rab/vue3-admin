@@ -71,6 +71,7 @@ module.exports = {
                 'max': 1
             }
         }],
+        // 设置的ignores不起作用
         'vue/multi-word-component-names': ['off', {
             'ignores': ['template']
         }]

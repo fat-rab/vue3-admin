@@ -1,6 +1,6 @@
-import Layout from "@/Layout/index.vue"
-import {AppRouteRecordRaw} from "@/ts/router";
-import {markRaw} from "vue";
+import Layout from '@/Layout/index.vue'
+import {AppRouteRecordRaw} from '@/ts/router'
+import {markRaw} from 'vue'
 
 const userManagerRouter: Array<AppRouteRecordRaw> = [
     {
@@ -17,11 +17,11 @@ const userManagerRouter: Array<AppRouteRecordRaw> = [
         children: [
             {
                 path: 'userMessage',
-                name: "UserMessage",
+                name: 'UserMessage',
                 meta: {
                     title: '用户信息'
                 },
-                component: () => import(/* webpackChunkName: "userMessage" */"@/views/userManager/userMessage.vue")
+                component: () => import(/* webpackChunkName: "userMessage" */'@/views/userManager/userMessage.vue')
             }
         ]
     }

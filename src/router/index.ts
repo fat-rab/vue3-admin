@@ -1,7 +1,7 @@
-import {createRouter, createWebHashHistory, RouteRecordRaw} from "vue-router";
-import {markRaw} from "vue";
-import Layout from "@/Layout/index.vue";
-import {AppRouteRecordRaw} from "@/ts/router";
+import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
+import {markRaw} from 'vue'
+import Layout from '@/Layout/index.vue'
+import {AppRouteRecordRaw} from '@/ts/router'
 
 
 /**
@@ -36,7 +36,7 @@ import {AppRouteRecordRaw} from "@/ts/router";
 export let constantModules: Array<AppRouteRecordRaw> = []
 const constantFiles = import.meta.globEager('./constantModules/*.ts')
 for (const modules in constantFiles) {
-    if (modules.indexOf("index.ts") === -1) {
+    if (modules.indexOf('index.ts') === -1) {
         constantModules = constantModules.concat(constantFiles[modules].default)
     }
 }
@@ -47,9 +47,9 @@ for (const modules in linkFiles) {
     linkModules = linkModules.concat(linkFiles[modules].default)
 }
 let permissionModules: Array<AppRouteRecordRaw> = []
-const permissionFiles = import.meta.globEager("./permissionModules/*.ts")
+const permissionFiles = import.meta.globEager('./permissionModules/*.ts')
 for (const modules in permissionFiles) {
-    if (modules.indexOf("index.ts") === -1) {
+    if (modules.indexOf('index.ts') === -1) {
         permissionModules = permissionModules.concat(permissionFiles[modules].default)
     }
 }
@@ -73,7 +73,7 @@ export const constantRoutes: Array<AppRouteRecordRaw> = [
         path: '/login',
         name: 'login',
         hidden: true,
-        component: () => import("@/views/login/index.vue")
+        component: () => import('@/views/login/index.vue')
     },
     ...constantModules,
     ...linkModules,

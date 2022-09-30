@@ -8,20 +8,20 @@
 </template>
 
 <script>
-import {computed} from "vue";
-import {useStore} from "vuex";
-import {SettingMutationEnum} from "@/ts/store/setting";
+import {computed} from 'vue'
+import {SettingActionsEnum} from '@/ts/store/setting'
+import {useSettingStore} from '@/store/setting'
 
 export default {
-  name: "FoldIcon",
+  name: 'FoldIcon',
   emits: ['hiddenSidebar'],
   setup() {
-    const store = useStore()
+    const settingStore = useSettingStore()
     const showTitle = computed(() => {
-      return store.state.setting.showTitle
+      return settingStore.showTitle
     })
     const hiddenSidebar = () => {
-      store.commit(`setting/${SettingMutationEnum.SHOW_TITLE}`)
+      settingStore[SettingActionsEnum.SHOW_TITLE]()
     }
     return {
       hiddenSidebar,

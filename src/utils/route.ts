@@ -1,6 +1,6 @@
-import {hasPermission} from "@/utils/permission";
-import {AppRouteRecordRaw} from "@/ts/router";
-import {RouteRecordName} from "vue-router";
+import {hasPermission} from '@/utils/permission'
+import {AppRouteRecordRaw} from '@/ts/router'
+import {RouteRecordName} from 'vue-router'
 
 export function filterRoute(routes: Array<AppRouteRecordRaw>, roles: Array<string>): Array<AppRouteRecordRaw> {
     const res: Array<AppRouteRecordRaw> = []

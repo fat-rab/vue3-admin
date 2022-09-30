@@ -15,22 +15,24 @@
 </template>
 
 <script>
-import {useRoute} from "vue-router";
-import {computed} from "vue";
-import {showTagsView} from "@/setting"
-import {useStore} from "vuex";
-import {PermissionMutationEnum} from "@/ts/store/permission";
+import {useRoute} from 'vue-router'
+import {computed} from 'vue'
+import {showTagsView} from '@/setting'
+import {PermissionActionsEnum} from '@/ts/store/permission'
+import {usePermissionStore} from '@/store/permission'
+import {useSettingStore} from '@/store/setting'
 
 export default {
   name: 'AppMain',
   setup() {
+    const permissionStore = usePermissionStore()
+    const settingStore = useSettingStore()
     const route = useRoute()
-    const store = useStore()
-    const showTitle = computed(() => store.state.setting.showTitle)
+    const showTitle = computed(() => settingStore.showTitle)
     const key = computed(() => route.path)
     // 获取缓存组件数组（储存的是route的name属性，组件name需要和route.name保持一致才能缓存）
-    store.commit(`permission/${PermissionMutationEnum.SET_CACHED_ROUTES}`)
-    const cachedViews = computed(() => store.state.permission.cachedRoutes)
+    permissionStore[PermissionActionsEnum.GET_CACHED_ROUTES]()
+    const cachedViews = computed(() => permissionStore.cachedRoutes)
     // console.log(cachedViews.value, 'cachedViews')
     return {
       cachedViews,

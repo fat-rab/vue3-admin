@@ -1,6 +1,6 @@
-import {useRoute} from "vue-router";
-import {AppRouteRecordRaw} from "@/ts/router";
-import {TagDetail} from "@/ts/store/tagsView";
+import {useRoute} from 'vue-router'
+import {AppRouteRecordRaw} from '@/ts/router'
+import {TagDetail} from '@/ts/store/tagsView'
 
 
 // 获取所有固定在tagsView中的路由

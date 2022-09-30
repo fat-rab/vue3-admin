@@ -1,20 +1,37 @@
 <template>
   <div>
-    <el-table>
-      <el-table-column :label="label" />
-    </el-table>
+    <div v-for="item in arr" :key="item">
+      {{ item }}{{ obj.name }}
+    </div>
+    <button @click="test">
+      test
+    </button>
   </div>
 </template>
 
 <script lang="ts">
 
+import {reactive, ref} from 'vue'
+
 export default {
   name: 'Home',
   components: {},
   setup() {
-    const label = 'test'
+    const arr = ref<Array<number>>([1, 2, 3, 4])
+    const data = {
+      name: 'tom'
+    }
+    const obj = reactive(data)
+
+    function test() {
+      arr.value[1] = 100
+      data.name = 'jerry'
+    }
+
     return {
-      label
+      arr,
+      test,
+      obj
     }
   }
 }

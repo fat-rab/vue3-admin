@@ -21,28 +21,30 @@
 </template>
 
 <script lang="ts">
-import SidebarLogo from "./SidebarLogo.vue";
-import SidebarItem from "./SidebarItem.vue"
-import {computed} from "vue";
-import {useStore} from "vuex";
-import {constantModules, linkModules} from "@/router";
-import {useRoute} from "vue-router";
+import SidebarLogo from './SidebarLogo.vue'
+import SidebarItem from './SidebarItem.vue'
+import {computed} from 'vue'
+import {constantModules, linkModules} from '@/router'
+import {useRoute} from 'vue-router'
+import {useSettingStore} from '@/store/setting'
+import {usePermissionStore} from '@/store/permission'
 
 
 export default {
-  name: "Sidebar",
+  name: 'Sidebar',
   components: {
     SidebarLogo,
     SidebarItem,
   },
   setup() {
-    const store = useStore();
-    const route = useRoute();
+    const settingStore = useSettingStore()
+    const permissionStore = usePermissionStore()
+    const route = useRoute()
     const isCollapse = computed(() => {
-      return !store.state.setting.showTitle
+      return !settingStore.showTitle
     })
     const routes = computed(() => {
-      return [...constantModules, ...store.state.permission.permissionRoutes, ...linkModules]
+      return [...constantModules, ...permissionStore.permissionRoutes, ...linkModules]
     })
     const activeMenu = computed(() => {
       const {meta, path} = route

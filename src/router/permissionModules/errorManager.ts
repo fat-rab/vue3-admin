@@ -1,6 +1,6 @@
-import Layout from "@/Layout/index.vue"
-import {AppRouteRecordRaw} from "@/ts/router";
-import {markRaw} from "vue";
+import Layout from '@/Layout/index.vue'
+import {AppRouteRecordRaw} from '@/ts/router'
+import {markRaw} from 'vue'
 
 const errorManagerRouter: Array<AppRouteRecordRaw> = [
     {
@@ -17,22 +17,22 @@ const errorManagerRouter: Array<AppRouteRecordRaw> = [
         children: [
             {
                 path: 'errMessage',
-                name: "ErrMessage",
+                name: 'ErrMessage',
                 meta: {
                     title: '错误信息',
-                    roles: ["admin"],
+                    roles: ['admin'],
                     noCache: true
                 },
-                component: () => import(/* webpackChunkName: "errorMessage" */"@/views/errorManager/errorMessage.vue")
+                component: () => import(/* webpackChunkName: "errorMessage" */'@/views/errorManager/errorMessage.vue')
             },
             {
                 path: 'errChart',
-                name: "ErrChart",
+                name: 'ErrChart',
                 meta: {
                     title: '错误列表',
-                    roles: ["charter"]
+                    roles: ['charter']
                 },
-                component: () => import(/* webpackChunkName: "errorChart" */"@/views/errorManager/errorChart.vue")
+                component: () => import(/* webpackChunkName: "errorChart" */'@/views/errorManager/errorChart.vue')
             }
         ]
     }

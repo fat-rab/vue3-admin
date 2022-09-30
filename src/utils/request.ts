@@ -1,20 +1,15 @@
 import axios, {AxiosRequestConfig, AxiosResponse} from 'axios'
 import {getToken, TokenKey} from '@/utils/auth'
-import {ElMessage, ElMessageBox} from "element-plus";
-import {UserActionEnum} from "@/ts/store/user";
-import store from '@/store'
-
-
-interface resStructure {
-    code: number
-    data: any
-    message: string
-}
+import {ElMessage, ElMessageBox} from 'element-plus'
+import {UserActionEnum} from '@/ts/store/user'
+import {resStructure} from '@/ts/axios'
+import {useUserStore} from '@/store/user'
 
 const request = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_API,
     timeout: 5000
 })
+
 // 请求拦截器
 request.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
     if (getToken()) {
@@ -22,7 +17,7 @@ request.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfi
         // @ts-ignore
         config.headers[TokenKey] = getToken()
     }
-    return config;
+    return config
 }, (error) => {
     console.log(error)
     return Promise.reject(error)
@@ -33,7 +28,7 @@ request.interceptors.response.use((response: AxiosResponse) => {
     // 如果code不是20000，那么弹出报错
     if (res.code !== 20000) {
         ElMessage({
-            type: "error",
+            type: 'error',
             message: res.message,
             duration: 3000
         })
@@ -49,10 +44,10 @@ request.interceptors.response.use((response: AxiosResponse) => {
                 }
             )
                 .then(() => {
+                    const userStore = useUserStore()
                     // 重置token,刷新页面重新登陆
-                    store.dispatch(`user/${UserActionEnum.RESET_TOKEN}`).then(() => {
-                        location.reload()
-                    })
+                    userStore[UserActionEnum.RESET_TOKEN]()
+                    location.reload()
                 })
         }
         return Promise.reject(new Error(res.message || 'Error'))
@@ -61,10 +56,11 @@ request.interceptors.response.use((response: AxiosResponse) => {
     }
 }, (error) => {
     ElMessage({
-        type: "error",
+        type: 'error',
         message: error.message,
         duration: 3000
     })
     return Promise.reject(error)
 })
+
 export default request

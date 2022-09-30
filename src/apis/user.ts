@@ -1,5 +1,7 @@
 import request from '@/utils/request'
 
+//import request from '@/utils/test'
+
 export function login(data: object) {
     return request({
         url: '/api/user/login',
@@ -15,9 +17,4 @@ export function getInfo() {
     })
 }
 
-export function logout() {
-    return request({
-        url: '/api/user/logout',
-        method: 'post'
-    })
-}
+

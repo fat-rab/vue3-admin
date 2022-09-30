@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
 import ElementPlus from 'unplugin-element-plus/vite'
+
 const {resolve} = require('path')
 
 export default defineConfig({
@@ -19,6 +20,8 @@ export default defineConfig({
             extensions: ['vue', 'md'],
             // 自动引入和注册组件
             include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+            // 指定组件位置，默认是src/components
+            dirs: ['src/components'],
             resolvers: [
                 //element 组件按需加载
                 ElementPlusResolver({
@@ -82,8 +85,7 @@ export default defineConfig({
         hmr: true, //启动热更新
         host: '0.0.0.0',  // 设置0.0.0.0控制台显示外部访问的地址
         port: 3000,
-        proxy: {
-        }
+        proxy: {}
     },
     resolve: {
         alias: {

@@ -1,7 +1,7 @@
 export const TokenKey = 'Admin-Token'
 
 export function getToken(): string {
-    return sessionStorage.getItem(TokenKey) || ""
+    return sessionStorage.getItem(TokenKey) || ''
 }
 
 export function setToken(token: string): void {

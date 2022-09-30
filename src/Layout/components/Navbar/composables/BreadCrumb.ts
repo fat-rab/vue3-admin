@@ -1,11 +1,11 @@
-import {RouteLocationMatched, RouteLocationNormalizedLoaded} from "vue-router";
-import {compile} from "path-to-regexp";
+import {RouteLocationMatched, RouteLocationNormalizedLoaded} from 'vue-router'
+import {compile} from 'path-to-regexp'
 
 export const getBreadCrumbList = function(route: RouteLocationNormalizedLoaded): Array<RouteLocationMatched> {
     const matched = route.matched.filter((item) => item.meta && item.meta.title)
     const first = matched[0]
     if (!isHome(first)) {
-        matched.unshift(({path: '/home', name: "home", meta: {title: '首页'}} as any))
+        matched.unshift(({path: '/home', name: 'home', meta: {title: '首页'}} as any))
     }
     return matched.filter((item) => item.meta?.title && item.meta.breadcrumb !== 'false')
 }

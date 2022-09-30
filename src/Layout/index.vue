@@ -12,16 +12,16 @@
 </template>
 
 <script lang="ts">
-import Sidebar from "./components/Sidebar/index.vue"
-import Navbar from "./components/Navbar/index.vue"
-import AppMain from "./components/AppMain.vue"
-import TagsView from "./components/TagsView/index.vue"
-import {useStore} from "vuex";
-import {computed} from "vue";
-import {showTagsView} from "@/setting"
+import Sidebar from './components/Sidebar/index.vue'
+import Navbar from './components/Navbar/index.vue'
+import AppMain from './components/AppMain.vue'
+import TagsView from './components/TagsView/index.vue'
+import {computed} from 'vue'
+import {showTagsView} from '@/setting'
+import {useSettingStore} from '@/store/setting'
 
 export default {
-  name: "Layout",
+  name: 'Layout',
   components: {
     Sidebar,
     Navbar,
@@ -29,9 +29,9 @@ export default {
     TagsView
   },
   setup() {
-    const store = useStore()
+    const settingStore = useSettingStore()
     const showTitle = computed(() => {
-      return store.state.setting.showTitle
+      return settingStore.showTitle
     })
 
     return {

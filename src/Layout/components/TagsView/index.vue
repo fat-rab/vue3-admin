@@ -32,33 +32,42 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, ref, watch} from "vue";
-import {initTagList, isActive} from "@/Layout/components/TagsView/composables";
-import {useStore} from "vuex";
-import {TagDetail,TagsViewMutationEnum} from "@/ts/store/tagsView";
-import {useRoute, useRouter} from "vue-router";
-import {constantModules} from "@/router";
-import variables from "@/styles/variables.scss"
+import {computed, defineComponent, ref, watch} from 'vue'
+import {initTagList, isActive} from '@/Layout/components/TagsView/composables'
+import {TagDetail, TagsViewActionEnum} from '@/ts/store/tagsView'
+import {useRoute, useRouter} from 'vue-router'
+import {constantModules} from '@/router'
+import variables from '@/styles/variables.module.scss'
+import {useTagsViewStore} from '@/store/tagsView'
+import {usePermissionStore} from '@/store/permission'
+import {useSettingStore} from '@/store/setting'
 
 export default defineComponent({
-  name: "TagsView",
+  name: 'TagsView',
   components: {},
   setup() {
-    const store = useStore()
+    const tagsViewStore = useTagsViewStore()
+    const permissionStore = usePermissionStore()
+    const settingStore = useSettingStore()
     const currentRoute = useRoute()
     const router = useRouter()
+
     let left = ref(0)
     let top = ref(0)
     let showMenu = ref(false)
     let tagObj: TagDetail
     let affix = ref(true)
     initTagsView()
-    const tagList = computed(() => store.state.tagsView.tagList)
+    const tagList = computed(() => tagsViewStore.tagList)
+
     watch(() => currentRoute.path, () => {
       if (currentRoute.path.indexOf('/redirect') > -1) return
       addTag()
+    }, {
+      immediate: true
     })
     watch(() => showMenu.value, (value) => {
+      // 点击空白处，关闭右键菜单
       if (value) {
         document.body.addEventListener('click', closeMenu)
       } else {
@@ -68,10 +77,7 @@ export default defineComponent({
 
     function closeTag(path: string | undefined): void {
       if (!path) path = tagObj.path
-      store.commit(
-          `tagsView/${TagsViewMutationEnum.DELETE_TAG}`,
-          path
-      )
+      tagsViewStore[TagsViewActionEnum.DELETE_TAG](path)
       if (path === currentRoute.path) {
         router.push(tagList.value[tagList.value.length - 1].path)
       }
@@ -79,33 +85,33 @@ export default defineComponent({
 
     function closeOtherTag(): void {
       const path = tagObj.path
-      store.commit(
-          `tagsView/${TagsViewMutationEnum.DELETE_OTHER_TAG}`,
-          path
-      )
+      tagsViewStore[TagsViewActionEnum.DELETE_OTHER_TAG](path)
       if (currentRoute.path !== path) router.push(path)
     }
 
     function closeAllTag(): void {
-      store.commit(`tagsView/${TagsViewMutationEnum.DELETE_ALL_TAG}`)
+      tagsViewStore[TagsViewActionEnum.DELETE_ALL_TAG]()
       let jump = true
+      // 判断当前页面是否属于固定在tags中的页面
+      // 如果是，则不跳转
       tagList.value.forEach((item: TagDetail) => {
         if (item.path === currentRoute.path) jump = false
       })
       if (jump) router.push(tagList.value[0].path)
     }
 
+    // 初始化tag
     function initTagsView() {
-      const routes = [...constantModules, ...store.state.permission.permissionRoutes]
+      const routes = [...constantModules, ...permissionStore.permissionRoutes]
       const tagsList = initTagList(routes)
-      store.commit(`tagsView/${TagsViewMutationEnum.SET_TAG_LIST}`, tagsList)
-      addTag()
+      tagsViewStore[TagsViewActionEnum.SET_TAG_LIST](tagsList)
     }
 
     function addTag() {
-      store.commit(`tagsView/${TagsViewMutationEnum.ADD_TAG_LIST}`, {
+      tagsViewStore[TagsViewActionEnum.ADD_TAG_LIST]({
         path: currentRoute.path,
-        title: currentRoute.meta?.title,
+        title: (currentRoute.meta?.title || currentRoute.path) as string,
+        affix: !!currentRoute.meta?.affix,
         query: currentRoute.query
       })
     }
@@ -119,7 +125,7 @@ export default defineComponent({
       tagObj = tag
       let sideBarWidth = Number(variables.sideBarWidthNumber)
       let closeSideBarWidth = Number(variables.closeSideBarWidthNumber)
-      const showTitle = store.state.setting.showTitle
+      const showTitle = settingStore.showTitle
       showMenu.value = true
       if (showTitle) {
         left.value = e.clientX - sideBarWidth
@@ -130,6 +136,7 @@ export default defineComponent({
     }
 
     function handleScroll() {
+      // 滚动滚动条时，关闭右键菜单
       closeMenu()
     }
 

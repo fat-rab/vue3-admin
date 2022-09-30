@@ -33,16 +33,16 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType} from "vue";
-import {AppRouteRecordRaw} from "@/ts/router";
-import {judgeShowingChild} from "@/utils/route";
-import SidebarIcon from "./SidebarIcon.vue"
-import SidebarItemLink from "@/Layout/components/Sidebar/SidebarItemLink.vue";
-import {isExternal} from "@/utils/judge";
+import {defineComponent, PropType} from 'vue'
+import {AppRouteRecordRaw} from '@/ts/router'
+import {judgeShowingChild} from '@/utils/route'
+import SidebarIcon from './SidebarIcon.vue'
+import SidebarItemLink from '@/Layout/components/Sidebar/SidebarItemLink.vue'
+import {isExternal} from '@/utils/judge'
 import path from 'path'
 
 export default defineComponent({
-  name: "SidebarItem",
+  name: 'SidebarItem',
   components: {
     SidebarItemLink,
     SidebarIcon
@@ -104,7 +104,7 @@ export default defineComponent({
       resolvePath
     }
   }
-});
+})
 
 </script>
 

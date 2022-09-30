@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import {title} from "@/setting"
+import {title} from '@/setting'
 
 export default {
-  name: "SidebarLogo",
+  name: 'SidebarLogo',
   props: {
     isCollapse: {
       type: Boolean,

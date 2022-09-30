@@ -28,24 +28,24 @@
   </div>
 </template>
 <script lang="ts">
-import {reactive, ref} from "vue";
+import {reactive, ref} from 'vue'
 import {Lock, User} from '@element-plus/icons-vue'
-import {ElForm} from "element-plus";
-import {useStore} from "vuex";
-import {UserActionEnum} from "@/ts/store/user";
-import {useRoute, useRouter} from "vue-router";
-import {LoginQuery} from "@/views/login/TS";
+import {ElForm} from 'element-plus'
+import {UserActionEnum} from '@/ts/store/user'
+import {useRoute, useRouter} from 'vue-router'
+import {LoginQuery} from '@/views/login/TS'
+import {useUserStore} from '@/store/user'
 
 export default {
-  name: "Login",
+  name: 'Login',
   setup() {
-    const store = useStore();
-    const router = useRouter();
+    const userStore = useUserStore()
+    const router = useRouter()
 
     const loginFormRef = ref<InstanceType<typeof ElForm>>()
     const loading = ref(false)
     const loginForm = reactive({
-      username: "admin",
+      username: 'admin',
       password: '123456'
     })
     const loginRules = {
@@ -56,7 +56,7 @@ export default {
       }],
       password: [{
         required: true,
-        message: "请输入密码",
+        message: '请输入密码',
         trigger: 'blur'
       }]
     }
@@ -74,16 +74,18 @@ export default {
     }
 
     const route = useRoute()
+    //获取重定向信息
     getQuery(route.query)
+
     const login = (username: string, password: string): void => {
       if (!loginFormRef.value) return
       loginFormRef.value.validate((valid: boolean | undefined) => {
             if (valid) {
               loading.value = true
-              store.dispatch(`user/${UserActionEnum.LOGIN}`, {username, password}).then(() => {
+              userStore[UserActionEnum.LOGIN]({username, password}).then(() => {
                 loading.value = false
                 router.push({
-                  path: redirect || "/",
+                  path: redirect || '/',
                   query: otherQuery
                 })
               })
@@ -91,6 +93,7 @@ export default {
           }
       )
     }
+
     return {
       loginForm,
       loginRules,
@@ -101,9 +104,11 @@ export default {
       loading
     }
   },
-  watch: {},
-
-  methods: {}
+  methods: {
+    test() {
+      // console.log(userStore)
+    }
+  }
 }
 </script>
 
