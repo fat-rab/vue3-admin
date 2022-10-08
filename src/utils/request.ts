@@ -1,5 +1,5 @@
 import axios, {AxiosRequestConfig, AxiosResponse} from 'axios'
-import {getToken, TokenKey} from '@/utils/auth'
+import {getToken, prefixStr, TokenKey} from '@/utils/auth'
 import {ElMessage, ElMessageBox} from 'element-plus'
 import {UserActionEnum} from '@/ts/store/user'
 import {resStructure} from '@/ts/axios'
@@ -15,11 +15,10 @@ request.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfi
     if (getToken()) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        config.headers[TokenKey] = getToken()
+        config.headers[TokenKey] = `${prefixStr} ${getToken()}`
     }
     return config
 }, (error) => {
-    console.log(error)
     return Promise.reject(error)
 })
 // 响应拦截器

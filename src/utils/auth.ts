@@ -1,13 +1,16 @@
-export const TokenKey = 'Admin-Token'
+
+export const prefixStr='Bearer'
+export const TokenKey = 'Authorization'
 
 export function getToken(): string {
-    return sessionStorage.getItem(TokenKey) || ''
+    return localStorage.getItem(TokenKey) || ''
 }
 
 export function setToken(token: string): void {
-    return sessionStorage.setItem(TokenKey, token)
+    return localStorage.setItem(TokenKey, token)
 }
 
 export function removeToken() {
-    return sessionStorage.removeItem(TokenKey)
+    return localStorage.removeItem(TokenKey)
 }
+
