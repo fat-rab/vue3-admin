@@ -23,7 +23,7 @@ const errorManagerRouter: Array<AppRouteRecordRaw> = [
                     roles: ['admin'],
                     noCache: true
                 },
-                component: () => import(/* webpackChunkName: "errorMessage" */'@/views/errorManager/errorMessage.vue')
+                component: () => import('@/views/errorManager/errorMessage.vue')
             },
             {
                 path: 'errChart',
@@ -32,7 +32,7 @@ const errorManagerRouter: Array<AppRouteRecordRaw> = [
                     title: '错误列表',
                     roles: ['charter']
                 },
-                component: () => import(/* webpackChunkName: "errorChart" */'@/views/errorManager/errorChart.vue')
+                component: () => import('@/views/errorManager/errorChart.vue')
             }
         ]
     }

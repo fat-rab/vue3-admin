@@ -22,25 +22,45 @@ const sysManagerRouter: Array<AppRouteRecordRaw> = [
                 meta: {
                     title: '系统信息'
                 },
-                component: () => import(/* webpackChunkName: "sysMessage" */'@/views/sysManager/sysMessage.vue')
+                component: () => import('@/views/sysManager/sysMessage.vue')
             },
             {
-                path: 'sysTest',
-                name: 'SysTest',
+                path: 'sysTest1',
+                name: 'SysTest1',
                 alwaysShow: true,
                 redirect: 'noRedirect',
                 meta: {
-                    title: '错误测试'
+                    title: '错误测试1'
                 },
-                component: () => import(/* webpackChunkName: "sysTest" */'@/views/sysManager/sysTest.vue'),
+                component: () => import('@/views/sysManager/sysTest.vue'),
                 children: [
                     {
-                        path: 'sysTest1',
-                        name: 'SysTest1',
+                        path: 'sysTest1-1',
+                        name: 'SysTest1-1',
                         meta: {
-                            title: '错误测试1'
+                            title: '错误测试1-1'
                         },
-                        component: () => import(/* webpackChunkName: "sysTest1" */'@/views/sysManager/sysTestChild.vue')
+                        component: () => import('@/views/sysManager/sysTestChild.vue')
+                    }
+                ]
+            },
+            {
+                path: 'sysTest2',
+                name: 'SysTest2',
+                alwaysShow: true,
+                redirect: 'noRedirect',
+                meta: {
+                    title: '错误测试2'
+                },
+                component: () => import('@/views/sysManager/sysTest.vue'),
+                children: [
+                    {
+                        path: 'sysTest2-2',
+                        name: 'SysTest2-2',
+                        meta: {
+                            title: '错误测试2-2'
+                        },
+                        component: () => import('@/views/sysManager/sysTestChild.vue')
                     }
                 ]
             }

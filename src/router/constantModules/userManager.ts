@@ -21,7 +21,7 @@ const userManagerRouter: Array<AppRouteRecordRaw> = [
                 meta: {
                     title: '用户信息'
                 },
-                component: () => import(/* webpackChunkName: "userMessage" */'@/views/userManager/userMessage.vue')
+                component: () => import('@/views/userManager/userMessage.vue')
             }
         ]
     }
