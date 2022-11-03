@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory, RouteRecordName, RouteRecordRaw} from 'vue-router'
+import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
 import {markRaw} from 'vue'
 import Layout from '@/Layout/index.vue'
 import {AppRouteRecordRaw} from '@/ts/router'
@@ -103,7 +103,9 @@ export function resetRouter() {
     // (router as any).matcher = (newRouter as any).matcher // reset router
     if (asyncRoutes && asyncRoutes.length) {
         asyncRoutes.forEach((item) => {
-            router.removeRoute(item.name as RouteRecordName)
+            if (item.name) {
+                router.removeRoute(item.name)
+            }
         })
     }
 }
