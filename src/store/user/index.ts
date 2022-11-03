@@ -41,10 +41,10 @@ export const useUserStore = defineStore('user', {
             })
         },
         [UserActionEnum.RESET_TOKEN](): void {
-            // this.token = ''
-            // this.name = ''
-            // this.roles = []
-            // this.avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
+            this.token = ''
+            this.name = ''
+            this.roles = []
+            this.avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
             removeToken()
             resetRouter()
         },
