@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
+import {createRouter, createWebHashHistory, RouteRecordName, RouteRecordRaw} from 'vue-router'
 import {markRaw} from 'vue'
 import Layout from '@/Layout/index.vue'
 import {AppRouteRecordRaw} from '@/ts/router'
@@ -98,8 +98,14 @@ const router = createRouter({
 })
 
 export function resetRouter() {
-    const newRouter = router;
-    (router as any).matcher = (newRouter as any).matcher // reset router
+    // vue-router4这个方法已经不起作用了
+    // const newRouter = router;
+    // (router as any).matcher = (newRouter as any).matcher // reset router
+    if (asyncRoutes && asyncRoutes.length) {
+        asyncRoutes.forEach((item) => {
+            router.removeRoute(item.name as RouteRecordName)
+        })
+    }
 }
 
 export default router
