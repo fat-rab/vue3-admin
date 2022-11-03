@@ -103,7 +103,7 @@ export function resetRouter() {
     // (router as any).matcher = (newRouter as any).matcher // reset router
     if (asyncRoutes && asyncRoutes.length) {
         asyncRoutes.forEach((item) => {
-            if (item.name) {
+            if (item.name && router.hasRoute(item.name)) {
                 router.removeRoute(item.name)
             }
         })

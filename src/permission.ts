@@ -38,6 +38,8 @@ router.beforeEach(async(to: RouteLocationNormalized, form: RouteLocationNormaliz
                     } else {
                         // 不直接使用next({...to, replace: true}),避免在动态路由的页面刷新浏览器出现警告并且跳转到404页面
                         if (to.path == '/404' && to.redirectedFrom != undefined) {
+                            // 即使重定向的的路由真的不存在，由于此时已经获取到角色，所以store.state.user.roles.length === 0不会通过
+                            // 不会无限循环这个操作
                             next({path: to.redirectedFrom?.fullPath, query: to.redirectedFrom?.query, replace: true})
                         } else {
                             next({...to, replace: true})
@@ -60,14 +62,25 @@ router.beforeEach(async(to: RouteLocationNormalized, form: RouteLocationNormaliz
         if (whiteList.includes(to.path)) {
             next()
         } else {
+            let path: string
             const query = {}
-            Object.keys(to.query).forEach((item) => {
-                query[item] = to.query[item]
-            })
+
+            if (to.path == '/404' && to.redirectedFrom !== undefined) {
+                path = to.redirectedFrom.path
+                Object.keys(to.redirectedFrom.query).forEach((item) => {
+                    query[item] = to.query[item]
+                })
+            } else {
+                path = to.path
+                Object.keys(to.query).forEach((item) => {
+                    query[item] = to.query[item]
+                })
+            }
+
             next({
                 path: '/login',
                 query: {
-                    redirect: to.path,
+                    redirect: path,
                     ...query
                 }
             })
