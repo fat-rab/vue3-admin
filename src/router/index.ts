@@ -98,16 +98,16 @@ const router = createRouter({
 })
 
 export function resetRouter() {
-    // vue-router4这个方法已经不起作用了
-    // const newRouter = router;
-    // (router as any).matcher = (newRouter as any).matcher // reset router
-    if (asyncRoutes && asyncRoutes.length) {
-        asyncRoutes.forEach((item) => {
-            if (item.name && router.hasRoute(item.name)) {
-                router.removeRoute(item.name)
-            }
-        })
-    }
+    // vue-router4这个方法已经不起作用了，但是addRoute会将之前没有重置的路由给移除，不知道为什么
+    const newRouter = router;
+    (router as any).matcher = (newRouter as any).matcher // reset router
+    // if (asyncRoutes && asyncRoutes.length) {
+    //     asyncRoutes.forEach((item) => {
+    //         if (item.name && router.hasRoute(item.name)) {
+    //             router.removeRoute(item.name)
+    //         }
+    //     })
+    // }
 }
 
 export default router
