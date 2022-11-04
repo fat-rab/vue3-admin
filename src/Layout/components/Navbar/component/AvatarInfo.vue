@@ -24,28 +24,21 @@
 
 <script lang="ts" setup>
 import {UserActionEnum} from '@/ts/store/user'
-import {useRoute, useRouter} from 'vue-router'
+import {useRouter} from 'vue-router'
 import {useUserStore} from '@/store/user'
+import {saveRedirectRoute} from '@/utils/route'
 
 const router = useRouter()
-const route = useRoute()
 const userStore = useUserStore()
 const handleCommand = (command: string | number | object) => {
   if (command === 'editPassword') {
     //TODO
   }
   if (command === 'loginOut') {
-    const query = {}
-    Object.keys(route.query).forEach((item) => {
-      query[item] = route.query[item]
-    })
+    saveRedirectRoute()
     userStore[UserActionEnum.RESET_TOKEN]()
     router.push({
       path: '/login',
-      query: {
-        redirect: route.path,
-        ...query
-      }
     })
   }
 }

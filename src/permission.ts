@@ -9,10 +9,11 @@ import {ElMessage} from 'element-plus'
 import {getToken} from '@/utils/auth'
 import {useUserStore} from '@/store/user'
 import {usePermissionStore} from '@/store/permission'
+import {RouteRedirect} from '@/ts/router'
 
 NProgress.configure({showSpinner: false}) //进度环隐藏
 
-router.beforeEach(async(to: RouteLocationNormalized, form: RouteLocationNormalized, next: NavigationGuardNext) => {
+router.beforeEach(async(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     NProgress.start()
     if (getToken()) {
         if (to.path === '/login') {
@@ -32,26 +33,36 @@ router.beforeEach(async(to: RouteLocationNormalized, form: RouteLocationNormaliz
                     permissionStore.permissionRoutes.forEach((item) => {
                         router.addRoute(item as RouteRecordRaw)
                     })
-                    // 避免退出系统，使用权限小于之前退出账号的账号再次登录，重定向到之前退出的没有访问权限的页面时候报错
-                    if (to.name && !router.hasRoute(to.name)) {
-                        next({path: '/', replace: true})
-                    } else {
-                        // 不直接使用next({...to, replace: true}),避免在动态路由的页面刷新浏览器出现警告并且跳转到404页面
-                        if (to.path == '/404' && to.redirectedFrom != undefined) {
-                            // 即使重定向的的路由真的不存在，由于此时已经获取到角色，所以store.state.user.roles.length === 0不会通过
-                            // 不会无限循环这个操作
-                            next({path: to.redirectedFrom?.fullPath, query: to.redirectedFrom?.query, replace: true})
-                        } else {
-                            next({...to, replace: true})
+                    // 如果是从登陆页面过来的，可能需要重定向
+                    if (from.path === '/login') {
+                        const str = sessionStorage.getItem('redirect')
+                        if (str) {
+                            const routeMsg: RouteRedirect = JSON.parse(str)
+                            if (routeMsg.name && router.hasRoute(routeMsg.name)) {
+                                next({path: routeMsg.path, query: routeMsg?.query, replace: true})
+                            } else {
+                                next({path: '/', replace: true})
+                            }
+                            sessionStorage.removeItem('redirect')
+                            return
                         }
                     }
+                    // 不直接使用next({...to, replace: true}),避免在动态路由的页面刷新浏览器出现警告并且跳转到404页面
+                    if (to.path == '/404' && to.redirectedFrom !== undefined) {
+                        // 即使重定向的的路由真的不存在，由于此时已经获取到角色，所以store.state.user.roles.length === 0不会通过
+                        // 不会无限循环这个操作
+                        next({path: to.redirectedFrom?.fullPath, query: to.redirectedFrom?.query, replace: true})
+                    } else {
+                        next({...to, replace: true})
+                    }
+
                 } catch (err) {
                     await userStore[UserActionEnum.RESET_TOKEN]()
                     ElMessage({
                         type: 'error',
                         message: '该账号没有权限访问此页面,请更换账号'
                     })
-                    next(`/login?redirect=${to.path}`)
+                    next('/')
                     NProgress.done()
                 }
             } else {
@@ -62,27 +73,8 @@ router.beforeEach(async(to: RouteLocationNormalized, form: RouteLocationNormaliz
         if (whiteList.includes(to.path)) {
             next()
         } else {
-            let path: string
-            const query = {}
-
-            if (to.path == '/404' && to.redirectedFrom !== undefined) {
-                path = to.redirectedFrom.path
-                Object.keys(to.redirectedFrom.query).forEach((item) => {
-                    query[item] = to.query[item]
-                })
-            } else {
-                path = to.path
-                Object.keys(to.query).forEach((item) => {
-                    query[item] = to.query[item]
-                })
-            }
-
             next({
                 path: '/login',
-                query: {
-                    redirect: path,
-                    ...query
-                }
             })
             NProgress.done()
         }

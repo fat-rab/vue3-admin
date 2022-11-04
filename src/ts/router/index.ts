@@ -18,3 +18,10 @@ export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
     meta?: RouteMeta
     children?: Array<AppRouteRecordRaw>
 }
+export interface RouteRedirect {
+    path: string
+    name?: string
+    query?: {
+        [key: string]: any
+    }
+}

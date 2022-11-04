@@ -32,8 +32,7 @@ import {reactive, ref} from 'vue'
 import {Lock, User} from '@element-plus/icons-vue'
 import {ElForm} from 'element-plus'
 import {UserActionEnum} from '@/ts/store/user'
-import {useRoute, useRouter} from 'vue-router'
-import {LoginQuery} from '@/views/login/TS'
+import {useRouter} from 'vue-router'
 import {useUserStore} from '@/store/user'
 
 export default {
@@ -60,22 +59,6 @@ export default {
         trigger: 'blur'
       }]
     }
-    let redirect = ''
-    const otherQuery = {}
-
-    //获取重定向信息
-    function getQuery(query: LoginQuery): void {
-      redirect = query.redirect || ''
-      Object.keys(query).forEach((key) => {
-        if (key !== 'redirect') {
-          otherQuery[key] = query[key]
-        }
-      })
-    }
-
-    const route = useRoute()
-    //获取重定向信息
-    getQuery(route.query)
 
     const login = (username: string, password: string): void => {
       if (!loginFormRef.value) return
@@ -85,8 +68,7 @@ export default {
               userStore[UserActionEnum.LOGIN]({username, password}).then(() => {
                 loading.value = false
                 router.push({
-                  path: redirect || '/',
-                  query: otherQuery
+                  path: '/'
                 })
               })
             }
@@ -102,11 +84,6 @@ export default {
       login,
       loginFormRef,
       loading
-    }
-  },
-  methods: {
-    test() {
-      // console.log(userStore)
     }
   }
 }

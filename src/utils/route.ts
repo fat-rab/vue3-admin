@@ -1,6 +1,7 @@
 import {hasPermission} from '@/utils/permission'
 import {AppRouteRecordRaw} from '@/ts/router'
 import {RouteRecordName} from 'vue-router'
+import router from '@/router'
 
 export function filterRoute(routes: Array<AppRouteRecordRaw>, roles: Array<string>): Array<AppRouteRecordRaw> {
     const res: Array<AppRouteRecordRaw> = []
@@ -44,4 +45,15 @@ export function getCachedRoutes(routes: Array<AppRouteRecordRaw>): Array<RouteRe
         }
     })
     return res
+}
+
+
+// 保存路由重定向信息
+export function saveRedirectRoute() {
+    const routeMsg = router.currentRoute.value
+    sessionStorage.setItem('redirect', JSON.stringify({
+        path: routeMsg.path,
+        name: routeMsg.name,
+        query: routeMsg.query
+    }))
 }
