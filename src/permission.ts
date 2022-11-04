@@ -62,7 +62,7 @@ router.beforeEach(async(to: RouteLocationNormalized, from: RouteLocationNormaliz
                         type: 'error',
                         message: '该账号没有权限访问此页面,请更换账号'
                     })
-                    next('/')
+                    next('/login')
                     NProgress.done()
                 }
             } else {
