@@ -21,7 +21,7 @@ import {AppRouteRecordRaw} from '@/ts/router'
  meta: {
   roles: ['admin', 'editor'] // 设置该路由进入的权限，支持多个权限叠加
   title: 'title' // 设置该路由在侧边栏和面包屑中展示的名字
-  icon: 'svg-name' // 设置该路由的图标，支持 svg-class，也支持 el-icon-x element-ui 的 icon
+  icon: 'svg-name' // 设置该路由的图标，支持自定义图片或者el-icon
   noCache: true // 如果设置为true，则不会被 <keep-alive> 缓存(默认 false)
   breadcrumb: false //  如果设置为false，则不会在breadcrumb面包屑中显示(默认 true)
   affix: true // 如果设置为true，它则会固定在tags-view中(默认 false)

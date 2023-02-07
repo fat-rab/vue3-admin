@@ -16,6 +16,10 @@ declare module '@vue/runtime-core' {
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     FormTitle: typeof import('./../components/Common/FormTitle.vue')['default']
+    IEpArrowDown: typeof import('~icons/ep/arrow-down')['default']
+    IEpClose: typeof import('~icons/ep/close')['default']
+    IEpExpand: typeof import('~icons/ep/expand')['default']
+    IEpFold: typeof import('~icons/ep/fold')['default']
     MyDialog: typeof import('./../components/Common/MyDialog.vue')['default']
     MyTable: typeof import('./../components/Common/MyTable/index.vue')['default']
     PageHeader: typeof import('./../components/Common/PageHeader.vue')['default']
@@ -23,7 +27,6 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TableSlot: typeof import('./../components/Common/MyTable/TableSlot.vue')['default']
-    Undefined: typeof import('./../components/index.vue')['default']
   }
 }
 

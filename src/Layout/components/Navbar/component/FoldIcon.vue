@@ -1,8 +1,8 @@
 <template>
   <div class="icon-container">
     <el-icon class="icon" @click="hiddenSidebar">
-      <fold v-if="showTitle" />
-      <expand v-else />
+      <i-ep-fold v-if="showTitle" />
+      <i-ep-expand v-else />
     </el-icon>
   </div>
 </template>
@@ -11,14 +11,9 @@
 import {computed} from 'vue'
 import {SettingActionsEnum} from '@/ts/store/setting'
 import {useSettingStore} from '@/store/setting'
-// import {Fold, Expand} from '@element-plus/icons-vue'
 
 export default {
   name: 'FoldIcon',
-  // components: {
-  //   Fold,
-  //   Expand
-  // },
   emits: ['hiddenSidebar'],
   setup() {
     const settingStore = useSettingStore()

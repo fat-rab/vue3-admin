@@ -2,34 +2,48 @@ import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
-import ElementPlus from 'unplugin-element-plus/vite'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import AutoImport from 'unplugin-auto-import/vite'
 
 const {resolve} = require('path')
-//因为项目中几乎不使用element图标，所以暂时没有使用unplugin-icons自动引入图标
 export default defineConfig({
     plugins: [
         vue(),
-        // 自动引入element-ui的样式，主要用于引入  ElementPlusResolver无法引入的message样式
-        ElementPlus({
-            // 引入的样式的类型，可以是css、sass、less等，
-            importStyle: 'css',
-            useSource: true
-        }),
-        // 自动引入自定义组件
-        Components({
-            extensions: ['vue', 'md'],
-            // 自动引入和注册组件
-            include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-            // 指定组件位置，默认是src/components
-            dirs: ['src/components'],
+        AutoImport({
+            // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
             resolvers: [
-                //element 组件按需加载
-                ElementPlusResolver({
-                    importStyle: 'sass', //引入组件的时候，自动引入对应的样式
+                ElementPlusResolver(),
+
+                // 自动导入图标组件
+                // // {prefix}-{enabledCollections}-{icon} 使用组件解析器时，必须遵循名称转换才能正确推断图标。
+                IconsResolver({
+                    prefix: 'icon', // 自动引入的Icon组件统一前缀，默认为 i
+                    enabledCollections: ['ep']
                 }),
             ],
-            dts: 'src/dts/components.d.ts',
-        })
+        }),
+
+        Components({
+            // extensions: ['vue', 'md'],
+            // // 自动引入和注册组件
+            // include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+            // // 指定组件位置，默认是src/components
+            // dirs: ['src/components'],
+            resolvers: [
+                // 自动注册图标组件
+                IconsResolver(),
+                // 自动导入 Element Plus 组件
+                ElementPlusResolver(),
+            ],
+
+            dts: 'src/dts/components.d.ts'
+        }),
+
+        Icons({
+            compiler: 'vue3',
+            autoInstall: true,
+        }),
     ],
     css: {
         preprocessorOptions: {

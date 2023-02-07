@@ -8,10 +8,8 @@
         :to="{path: item.path,query: item.query}"
         @contextmenu.prevent="openMenu(item,$event)"
       >
-        {{ item.title }}
-        <el-icon v-if="!item.affix" class="el-icon-close" @click.prevent.stop="closeTag(item.path)">
-          <close />
-        </el-icon>
+        <span class="tag-name">{{ item.title }}</span>
+        <i-ep-close v-if="!item.affix" class="el-icon-close" @click.prevent.stop="closeTag(item.path)" />
       </router-link>
     </el-scrollbar>
   </div>
@@ -44,7 +42,6 @@ import {useSettingStore} from '@/store/setting'
 
 export default defineComponent({
   name: 'TagsView',
-  components: {},
   setup() {
     const tagsViewStore = useTagsViewStore()
     const permissionStore = usePermissionStore()
@@ -229,13 +226,15 @@ export default defineComponent({
       color: #fff;
     }
 
+    .tag-name {
+      vertical-align: middle;
+    }
+
     .el-icon-close {
-      width: 16px;
-      height: 16px;
-      line-height: 16px;
       font-size: 8px;
       border-radius: 50%;
       text-align: center;
+      vertical-align: middle;
       transition: all .3s cubic-bezier(.645, .045, .355, 1);
       transform-origin: 100% 50%;
     }
