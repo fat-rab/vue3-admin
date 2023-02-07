@@ -3,16 +3,16 @@ $--colors: (
                 "base": #0A6FEB,
         ),
         "success": (
-                "base": #13ce66,
+                "base": #3ACFAD,
         ),
         "warning": (
-                "base": #df9c26,
+                "base": #FFA21D,
         ),
         "danger": (
-                "base": #ed5858,
+                "base": #FF6767,
         ),
         "error": (
-                "base": #ed5858,
+                "base": #FF6767,
         ),
         "info": (
                 "base": #909399,
@@ -52,6 +52,7 @@ $common--component--size: (
         'default': 32px,
         'small': 24px,
 );
+
 @forward "element-plus/theme-chalk/src/common/var" with
   (
     // do not use same name, it will override.
@@ -59,14 +60,14 @@ $common--component--size: (
     $text-color:$text--colors,
     $border-color:$border--color,
     $common-component-size:$common--component--size,
-    $table:$table--colors
+    $table:$table--colors,
   );
 
-// 引入所有element 样式
-// @use "element-plus/theme-chalk/src/index" as *;
+// 引入所有element 样式, 设置了全局引入，所以注释
+//@use "element-plus/theme-chalk/src/index" as *;
 
-// @use "element-plus/theme-chalk/src/dark/css-vars.scss" as *;
-//@import "element-ui";
+// 自定义element-ui样式
+@import "element-ui";
 // You can comment it to hide debug info.
 // @debug $--colors;
 

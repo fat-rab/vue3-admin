@@ -14,8 +14,6 @@ import request from './utils/request'
 import './permission'
 import {mockXHR} from '../mock'
 
-
-
 // if (process.env.NODE_ENV === 'production') {
 //     mockXHR()
 // }

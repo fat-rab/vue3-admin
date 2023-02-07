@@ -7,13 +7,18 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {computed} from 'vue'
 import {SettingActionsEnum} from '@/ts/store/setting'
 import {useSettingStore} from '@/store/setting'
+// import {Fold, Expand} from '@element-plus/icons-vue'
 
 export default {
   name: 'FoldIcon',
+  // components: {
+  //   Fold,
+  //   Expand
+  // },
   emits: ['hiddenSidebar'],
   setup() {
     const settingStore = useSettingStore()

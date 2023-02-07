@@ -9,7 +9,7 @@ import Layout from '@/Layout/index.vue'
         children: [
             {
                 path: 'https://gitee.com/oujinlong/yunjia-template-web3.0',
-                meta: {title: '外链', icon: 'link'}
+                meta: {title: '外链', icon: 'court-video'}
             }
         ]
     }

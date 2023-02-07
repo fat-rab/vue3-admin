@@ -10,8 +10,20 @@
   }
 }
 
+//el-overlay-dialog
+//让dialog居中
+.el-overlay-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 //el-dialog
 .el-dialog {
+  border-radius: 6px;
+  margin: 0;
+  box-shadow: 0 2px 6px -4px rgba(130, 136, 148, 0.4800), 0px 0px 2px 0px rgba(130, 136, 148, 0.1600);
+
   .el-dialog__header {
     height: 48px;
     padding: 13px 24px;
@@ -39,6 +51,18 @@
 
   .el-dialog__body {
     padding: 24px 32px 0 24px;
+  }
+
+  &.right-padding {
+    .el-dialog__body {
+      padding: 24px 118px 0 24px;
+    }
+  }
+
+  &.padding-4 {
+    .el-dialog__body {
+      padding: 4px;
+    }
   }
 
   .el-dialog__footer {
@@ -103,3 +127,29 @@
   }
 
 }
+
+//el-button
+.el-button {
+  &:not(.el-button--large,.el-button--small) {
+    padding: 6px 25px;
+  }
+
+  &.is-link {
+    padding: 0;
+  }
+}
+
+.el-button + .el-button {
+  margin-left: 8px;
+}
+
+
+//el-input
+.el-input {
+  &.is-disabled {
+    .el-input__inner {
+      color: $textColor;
+    }
+  }
+}
+

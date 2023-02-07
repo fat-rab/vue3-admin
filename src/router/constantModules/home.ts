@@ -15,7 +15,7 @@ const homeRouter: Array<AppRouteRecordRaw> = [
                 name: 'Home',
                 meta: {
                     title: '首页',
-                    icon: 'Eleme',
+                    icon: 'court-video',
                     affix: true
                 }
             }

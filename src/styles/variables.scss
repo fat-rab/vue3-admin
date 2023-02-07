@@ -1,7 +1,6 @@
 // base color
-$mainColor: #3760F4;
-$blue: #3760F4;
-$mainFontColor: #303133;
+$mainColor: #0A6FEB;
+
 //header
 $headerHeight: 44px;
 //navbar
@@ -9,23 +8,46 @@ $navbarHeight: 44px;
 //tagsView
 $tagsViewHeight: 44px;
 //sidebar
+// 菜单背景色
 $menuBgColor: #ffffff;
-$menuTextColor: #303133;
-$menuActiveTextColor: #303133;
-$menuHoverBgColor: #ecf5ff;
+// 菜单字体颜色
+$menuTextColor: #606266;
+// 菜单字体选中颜色
+$menuActiveTextColor: #0A6FEB;
+// 菜单悬浮色
+$menuHoverBgColor: rgba(10, 111, 235, 6%);
+// 二级菜单颜色
 $subMenuBgColor: #ffffff;
-$menuActiveBgColor: #E1E7FE;
-$menuActiveBorderColor: #3760f4;
+// 菜单选中颜色
+$menuActiveBgColor: rgba(10, 111, 235, 6%);
+// 菜单边框颜色
+$menuBorderColor: #ffffff;
+// 菜单选中边框颜色
+$menuActiveBorderColor: #0A6FEB;
+// 菜单宽度
 $sideBarWidth: 200px;
+// 菜单缩放宽度
 $closeSideBarWidth: 52px;
-// fontColor
-$menuBgColor: #ffffff;
-$menuTextColor: #303133;
-$menuActiveTextColor: #303133;
+// 菜单arrow
+$sideBarArrowColor: rgba(0, 0, 0, 0.25);
+// primaryTextColor
+$mainFontColor: #303133;
+//textColor
+$textColor: #606266;
+//secondTextColor
+$secondTextColor: #909399;
+//supTextColor
+$supTextColor: #bfc2cc;
+//inputBorderColor
+$inputBorderColor: #dcdfe6;
+// splitLineColor
+$splitLineColor: #e5e7ed;
+// tableSplitLineColor
+$tableSplitLineColor: #eff1f4;
+//tableHeaderColor
+$tableHeaderColor: #fafafa;
 // bgColor
-$bgColor: #F5F7FA;
+$bgColor: #f8f9fd;
 //borderColor
 $borderColor: #e5e7ed;
 
-//tableHeaderColor
-$tableHeaderColor: #fafafa;

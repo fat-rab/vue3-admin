@@ -10,7 +10,7 @@ const userManagerRouter: Array<AppRouteRecordRaw> = [
         redirect: 'noRedirect',
         meta: {
             title: '用户管理',
-            icon: 'Avatar',
+            icon: 'court-video',
             noCache: true
         },
         component: markRaw(Layout),

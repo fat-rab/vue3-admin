@@ -10,7 +10,7 @@ const errorManagerRouter: Array<AppRouteRecordRaw> = [
         redirect: 'noRedirect',
         meta: {
             title: '错误管理',
-            icon: 'Aim'
+            icon: 'court-video'
         },
         // markRaw 标记 Layout，使其不会转换成代理对象，减少开销
         component: markRaw(Layout),

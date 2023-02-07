@@ -11,7 +11,7 @@ const sysManagerRouter: Array<AppRouteRecordRaw> = [
         redirect: 'noRedirect',
         meta: {
             title: '系统管理',
-            icon: 'Setting',
+            icon: 'court-video',
             roles: ['admin']
         },
         component: markRaw(Layout),
