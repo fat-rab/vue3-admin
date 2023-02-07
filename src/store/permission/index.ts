@@ -11,10 +11,10 @@ export const usePermissionStore = defineStore('permission', {
         }
     },
     actions: {
-        [PermissionActionsEnum.GET_CACHED_ROUTES]() {
+        [PermissionActionsEnum.GET_CACHED_ROUTES](): void {
             this.cachedRoutes = getCachedRoutes([...constantModules, ...asyncRoutes])
         },
-        [PermissionActionsEnum.GET_PERMISSION_ROUTES](payload: Array<string>) {
+        [PermissionActionsEnum.GET_PERMISSION_ROUTES](payload: Array<string>): void {
             this.permissionRoutes = filterRoute(asyncRoutes, payload)
         }
     }

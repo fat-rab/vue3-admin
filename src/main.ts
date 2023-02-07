@@ -6,7 +6,7 @@ import {createPinia} from 'pinia'
 // import './styles/element/index.scss'
 // import ElementPlus from 'element-plus'
 
-// 如果需要使用ElMessage 还是需要引入
+// 如果需要使用ElMessage 还是需要引入(使用了unplugin-element-plus/vite,不再需要引入该样式)
 // import "element-plus/theme-chalk/src/message.scss"
 
 import './styles/index.scss'

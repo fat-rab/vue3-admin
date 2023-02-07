@@ -14,7 +14,7 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import {useRoute} from 'vue-router'
 import {computed} from 'vue'
 import {showTagsView} from '@/setting'
@@ -33,7 +33,7 @@ export default {
     // 获取缓存组件数组（储存的是route的name属性，组件name需要和route.name保持一致才能缓存）
     permissionStore[PermissionActionsEnum.GET_CACHED_ROUTES]()
     const cachedViews = computed(() => permissionStore.cachedRoutes)
-    // console.log(cachedViews.value, 'cachedViews')
+    // console.log(cachedViews, 'cachedViews')
     return {
       cachedViews,
       key,
