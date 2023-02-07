@@ -22,6 +22,7 @@ export default defineConfig({
                     enabledCollections: ['ep']
                 }),
             ],
+            dts: 'src/dts/auto-imports.d.ts'
         }),
 
         Components({
