@@ -26,11 +26,11 @@ export default defineConfig({
         }),
 
         Components({
-            // extensions: ['vue', 'md'],
-            // // 自动引入和注册组件
-            // include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-            // // 指定组件位置，默认是src/components
-            // dirs: ['src/components'],
+            extensions: ['vue', 'md'],
+            // 自动引入和注册组件
+            include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+            // 指定组件位置，默认是src/components
+            dirs: ['src/components'],
             resolvers: [
                 // 自动注册图标组件
                 IconsResolver(),
