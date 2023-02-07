@@ -16,7 +16,7 @@ export default defineConfig({
                 ElementPlusResolver(),
 
                 // 自动导入图标组件
-                // // {prefix}-{enabledCollections}-{icon} 使用组件解析器时，必须遵循名称转换才能正确推断图标。
+                // {prefix}-{enabledCollections}-{icon} 使用组件解析器时，必须遵循名称转换才能正确推断图标。
                 IconsResolver({
                     prefix: 'icon', // 自动引入的Icon组件统一前缀，默认为 i
                     enabledCollections: ['ep']

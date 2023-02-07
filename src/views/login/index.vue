@@ -10,10 +10,18 @@
         :rules="loginRules"
       >
         <el-form-item prop="username">
-          <el-input v-model="loginForm.username" :prefix-icon="User" />
+          <el-input v-model="loginForm.username">
+            <template #prefix>
+              <i-ep-user />
+            </template>
+          </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="loginForm.password" :prefix-icon="Lock" show-password type="password" />
+          <el-input v-model="loginForm.password" show-password type="password">
+            <template #prefix>
+              <i-ep-lock />
+            </template>
+          </el-input>
         </el-form-item>
         <el-button
           class="login-btn"
@@ -29,7 +37,6 @@
 </template>
 <script lang="ts">
 import {reactive, ref} from 'vue'
-import {Lock, User} from '@element-plus/icons-vue'
 import {ElForm} from 'element-plus'
 import {UserActionEnum} from '@/ts/store/user'
 import {useRouter} from 'vue-router'
@@ -79,8 +86,6 @@ export default {
     return {
       loginForm,
       loginRules,
-      User,
-      Lock,
       login,
       loginFormRef,
       loading
