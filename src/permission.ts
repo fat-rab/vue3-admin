@@ -27,7 +27,7 @@ router.beforeEach(async(to: RouteLocationNormalized, from: RouteLocationNormaliz
                     await userStore[UserActionEnum.GET_USER_INFO]()
                     const roles = userStore.roles
                     if (roles.length === 0) {
-                        throw new Error('')
+                        return Promise.reject('roles.length===0')
                     }
                     await permissionStore[PermissionActionsEnum.GET_PERMISSION_ROUTES](roles)
                     permissionStore.permissionRoutes.forEach((item) => {
