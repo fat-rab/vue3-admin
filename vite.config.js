@@ -5,11 +5,20 @@ import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import AutoImport from 'unplugin-auto-import/vite'
-
+import ElementPlus from 'unplugin-element-plus/vite'
+// 在 <script setup>这个标签里面使用
+import DefineOptions from 'unplugin-vue-define-options/vite'
 const {resolve} = require('path')
 export default defineConfig({
     plugins: [
         vue(),
+        DefineOptions(),
+        // 自动引入element-ui的样式，主要用于引入  ElementPlusResolver无法引入的message样式
+        ElementPlus({
+            // 引入的样式的类型，可以是css、sass、less等，
+            importStyle: 'css',
+            useSource: true
+        }),
         AutoImport({
             // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
             resolvers: [

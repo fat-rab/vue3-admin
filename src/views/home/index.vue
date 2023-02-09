@@ -11,7 +11,8 @@
 
 <script lang="ts">
 
-import {reactive, ref} from 'vue'
+import {onMounted, reactive, ref} from 'vue'
+import {ElMessage} from 'element-plus'
 
 export default {
   name: 'Home',
@@ -28,6 +29,12 @@ export default {
       data.name = 'jerry'
     }
 
+    onMounted(() => {
+      ElMessage({
+        type: 'success',
+        message: '123123'
+      })
+    })
     return {
       arr,
       test,

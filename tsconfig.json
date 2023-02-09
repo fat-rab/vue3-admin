@@ -27,7 +27,8 @@
       "webpack-env",
       "jest",
       "vite/client",
-      "lodash"
+      "lodash",
+      "unplugin-vue-define-options"
       // 如果想使用import.meta.env使用环境变量需要配置这个
     ],
     "paths": {
