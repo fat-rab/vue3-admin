@@ -9,7 +9,6 @@
       :row-key="rowKey"
       style="width: 100%"
       @selection-change="handleSelectionChange"
-      @select-all="handleSelectAll"
     >
       <el-table-column
         v-if="showSelection"
@@ -55,13 +54,6 @@
       </template>
     </el-table>
     <div class="left-footer">
-      <!--      <el-checkbox-->
-      <!--        v-model="allSelect"-->
-      <!--        :isIndeterminate="isIndeterminate"-->
-      <!--        class="check-box"-->
-      <!--        label="全选"-->
-      <!--        @change="handleCheckBox"-->
-      <!--      />-->
       <el-link
         v-show="showDeleteBtn"
         :underline="false"
@@ -154,15 +146,10 @@ export default defineComponent({
   },
   emits: ['handleCurrentPage', 'handlePageSize', 'handleSelectionChange', 'handleDeleteAllSelected'],
   setup(props, context) {
-    //const {tableData, currentPage, pageSize} = toRefs(props)
     const {emit} = context
     const tableRef = ref()
-    // const allSelect = ref(false)
-    // const isIndeterminate = ref(false)
     const showDeleteBtn = ref(false)
     const selectArr = ref([])
-    // 用来存储每一页 选中个数
-    // const selectObj: PageSelect = {}
 
     function handleCurrentPage(e: number) {
       emit('handleCurrentPage', e)
@@ -172,22 +159,12 @@ export default defineComponent({
       emit('handlePageSize', e)
     }
 
-    // function handleCheckBox() {
-    //   tableRef.value?.toggleAllSelection()
-    // }
-
     function handleDeleteAllSelected() {
       emit('handleDeleteAllSelected')
     }
 
-    function handleSelectAll() {
-      // allSelect.value = e.length !== 0
-      // showDeleteBtn.value = e.length !== 0
-    }
-
     function handleSelectionChange(e: any) {
       selectArr.value = e
-      judgeCheckboxStatus()
       emit('handleSelectionChange', e)
       showDeleteBtn.value = e.length !== 0
     }
@@ -197,15 +174,6 @@ export default defineComponent({
       showDeleteBtn.value = false
     }
 
-    // watch(tableData.value, () => {
-    //   judgeCheckboxStatus()
-    // })
-
-    function judgeCheckboxStatus() {
-      // const tableBody = document.getElementsByClassName('el-table__body-wrapper')[0]
-      // console.log(tableBody.children)
-
-    }
 
     return {
       handleCurrentPage,
@@ -213,12 +181,8 @@ export default defineComponent({
       tableRef,
       handleSelectionChange,
       clearSelection,
-      handleSelectAll,
       handleDeleteAllSelected,
       showDeleteBtn,
-      // allSelect,
-      // isIndeterminate
-      // handleCheckBox,
     }
   }
 })
