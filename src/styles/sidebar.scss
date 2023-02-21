@@ -33,6 +33,7 @@
       }
 
       .el-menu-item, .el-sub-menu__title {
+        color: $menuTextColor;
         // 菜单选中样式
         &.is-active {
           background-color: $menuActiveBgColor;
