@@ -8,16 +8,17 @@ export interface RouteMeta {
     breadcrumb?: boolean
     affix?: boolean
 }
-//test
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
+
+export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta' | 'children'> {
     hidden?: boolean
     redirect?: string
     alwaysShow?: boolean
     meta?: RouteMeta
     children?: Array<AppRouteRecordRaw>
+    pId?: string //仅仅用来后端返回路由的层级判断
+    id?: string
 }
+
 export interface RouteRedirect {
     path: string
     name?: string
