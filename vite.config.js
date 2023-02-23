@@ -13,14 +13,14 @@ export default defineConfig({
     plugins: [
         vue(),
         DefineOptions(),
-        // 自动引入element-ui的样式，主要用于引入  ElementPlusResolver无法引入的message样式
+        // 自动引入element-ui的样式，主要用于引入ElMessage, ElMessageBox等函数的自定义样式
         ElementPlus({
             // 引入的样式的类型，可以是css、sass、less等，
             importStyle: 'css',
             useSource: true
         }),
         AutoImport({
-            // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
+            // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带默认样式)
             resolvers: [
                 ElementPlusResolver(),
 

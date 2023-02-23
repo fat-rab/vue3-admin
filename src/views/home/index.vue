@@ -1,45 +1,22 @@
 <template>
-  <div>
-    <div v-for="item in arr" :key="item">
-      {{ item }}{{ obj.name }}
-    </div>
-    <button @click="test">
-      test
-    </button>
-  </div>
+  <div />
 </template>
 
 <script lang="ts">
 
-import {onMounted, reactive, ref} from 'vue'
-import {ElMessage} from 'element-plus'
+
+import {onMounted} from 'vue'
+// import {alertWarningMessage} from '@/utils/message'
+import {confirmMessageBox} from '@/utils/messageBox'
 
 export default {
   name: 'Home',
-  components: {},
   setup() {
-    const arr = ref<Array<number>>([1, 2, 3, 4])
-    const data = {
-      name: 'tom'
-    }
-    const obj = reactive(data)
-
-    function test() {
-      arr.value[1] = 100
-      data.name = 'jerry'
-    }
-
     onMounted(() => {
-      ElMessage({
-        type: 'success',
-        message: '123123'
-      })
+      //alertWarningMessage('test')
+      confirmMessageBox('warning', 'test')
     })
-    return {
-      arr,
-      test,
-      obj
-    }
+    return {}
   }
 }
 </script>
