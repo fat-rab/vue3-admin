@@ -2,8 +2,10 @@ import {defineStore} from 'pinia'
 import {getToken, removeToken, setToken} from '@/utils/auth'
 import {UserActionEnum, UserState} from '@/ts/store/user'
 import {getInfo, login} from '@/apis/user'
-import {resStructure} from '@/ts/axios'
+import {ResStructure} from '@/ts/axios'
 import {resetRouter} from '@/router'
+import {LoginRes} from '@/ts/login'
+
 
 export const useUserStore = defineStore('user', {
     state: (): UserState => {
@@ -17,7 +19,7 @@ export const useUserStore = defineStore('user', {
     actions: {
         [UserActionEnum.LOGIN](payload: any) {
             return new Promise((resolve, reject) => {
-                login(payload).then(({data}) => {
+                login(payload).then(({data}:ResStructure<LoginRes>) => {
                     this.token = data.token
                     setToken(data.token)
                     resolve(data)
@@ -28,7 +30,7 @@ export const useUserStore = defineStore('user', {
         },
         [UserActionEnum.GET_USER_INFO]() {
             return new Promise((resolve, reject) => {
-                getInfo().then(({data}: resStructure<UserState>) => {
+                getInfo().then(({data}:ResStructure<UserState>) => {
                     this.name = data.name
                     this.roles = data.roles
                     if (data.avatar) {

@@ -5,7 +5,7 @@ export interface myAxiosConfig extends AxiosRequestConfig{
 }
 
 
-export interface resStructure<T = any> {
+export interface ResStructure<T = any> {
     code: number
     data: T
     message: string

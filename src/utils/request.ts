@@ -2,7 +2,7 @@ import axios, {AxiosRequestConfig, AxiosResponse} from 'axios'
 import {getToken, prefixStr, TokenKey} from '@/utils/auth'
 import {ElMessage, ElMessageBox} from 'element-plus'
 import {UserActionEnum} from '@/ts/store/user'
-import {myAxiosConfig, resStructure} from '@/ts/axios'
+import {myAxiosConfig, ResStructure} from '@/ts/axios'
 import {useUserStore} from '@/store/user'
 
 const axiosInstance = axios.create({
@@ -23,7 +23,7 @@ axiosInstance.interceptors.request.use((config: AxiosRequestConfig): AxiosReques
 })
 // 响应拦截器
 axiosInstance.interceptors.response.use((response: AxiosResponse) => {
-    const res: resStructure = response.data
+    const res: ResStructure = response.data
     // 如果code不是20000，那么弹出报错
     if (res.code !== 20000) {
         ElMessage({
@@ -63,9 +63,9 @@ axiosInstance.interceptors.response.use((response: AxiosResponse) => {
 })
 
 class HttpClient {
-    public http(config: myAxiosConfig): Promise<resStructure> {
+    public http(config: myAxiosConfig): Promise<ResStructure> {
         return new Promise((resolve, reject) => {
-            axiosInstance(config.url, config).then((res) => {
+            axiosInstance(config).then((res) => {
                 resolve(res.data)
             }).catch((err) => {
                 reject(err)
