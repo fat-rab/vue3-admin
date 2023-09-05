@@ -1,5 +1,4 @@
 import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
-import {markRaw} from 'vue'
 import Layout from '@/Layout/index.vue'
 import {AppRouteRecordRaw} from '@/ts/router'
 
@@ -59,8 +58,7 @@ export const asyncRoutes: Array<AppRouteRecordRaw> = [
 export const constantRoutes: Array<AppRouteRecordRaw> = [
     {
         path: '/redirect',
-        // markRaw 标记 Layout，使其不会转换成代理对象，减少开销
-        component: markRaw(Layout),
+        component: Layout,
         hidden: true,
         children: [
             {

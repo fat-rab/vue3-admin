@@ -29,6 +29,7 @@ export const useUserStore = defineStore('user', {
         [UserActionEnum.GET_USER_INFO]() {
             return new Promise((resolve, reject) => {
                 getInfo().then(({data}: resStructure<UserState>) => {
+                    console.log(data,'data')
                     this.name = data.name
                     this.roles = data.roles
                     if (data.avatar) {

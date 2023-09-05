@@ -1,6 +1,5 @@
 import Layout from '@/Layout/index.vue'
 import {AppRouteRecordRaw} from '@/ts/router'
-import {markRaw} from 'vue'
 
 
 const sysManagerRouter: Array<AppRouteRecordRaw> = [
@@ -14,7 +13,7 @@ const sysManagerRouter: Array<AppRouteRecordRaw> = [
             icon: 'court-video',
             roles: ['admin']
         },
-        component: markRaw(Layout),
+        component: Layout,
         children: [
             {
                 path: 'sysMessage',

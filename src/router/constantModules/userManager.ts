@@ -1,6 +1,5 @@
 import Layout from '@/Layout/index.vue'
 import {AppRouteRecordRaw} from '@/ts/router'
-import {markRaw} from 'vue'
 
 const userManagerRouter: Array<AppRouteRecordRaw> = [
     {
@@ -13,7 +12,7 @@ const userManagerRouter: Array<AppRouteRecordRaw> = [
             icon: 'court-video',
             noCache: true
         },
-        component: markRaw(Layout),
+        component: Layout,
         children: [
             {
                 path: 'userMessage',

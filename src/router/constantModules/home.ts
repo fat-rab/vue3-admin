@@ -1,12 +1,11 @@
 import Layout from '@/Layout/index.vue'
 import {AppRouteRecordRaw} from '@/ts/router'
-import {markRaw} from 'vue'
 
 
 const homeRouter: Array<AppRouteRecordRaw> = [
     {
         path: '/',
-        component: markRaw(Layout),
+        component: Layout,
         redirect: '/home',
         children: [
             {
