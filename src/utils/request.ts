@@ -23,6 +23,7 @@ axiosInstance.interceptors.request.use((config: AxiosRequestConfig): AxiosReques
 })
 // 响应拦截器
 axiosInstance.interceptors.response.use((response: AxiosResponse) => {
+    if (response.config.responseType === 'blob') return response
     const res: ResStructure = response.data
     // 如果code不是20000，那么弹出报错
     if (res.code !== 20000) {
