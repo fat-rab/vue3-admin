@@ -2,16 +2,16 @@ import axios, {AxiosRequestConfig, AxiosResponse} from 'axios'
 import {getToken, prefixStr, TokenKey} from '@/utils/auth'
 import {ElMessage, ElMessageBox} from 'element-plus'
 import {UserActionEnum} from '@/ts/store/user'
-import {resStructure} from '@/ts/axios'
+import {myAxiosConfig, resStructure} from '@/ts/axios'
 import {useUserStore} from '@/store/user'
 
-const request = axios.create({
+const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_API,
     timeout: 5000
 })
 
 // 请求拦截器
-request.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
+axiosInstance.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
     if (getToken()) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -22,7 +22,7 @@ request.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfi
     return Promise.reject(error)
 })
 // 响应拦截器
-request.interceptors.response.use((response: AxiosResponse) => {
+axiosInstance.interceptors.response.use((response: AxiosResponse) => {
     const res: resStructure = response.data
     // 如果code不是20000，那么弹出报错
     if (res.code !== 20000) {
@@ -62,4 +62,23 @@ request.interceptors.response.use((response: AxiosResponse) => {
     return Promise.reject(error)
 })
 
-export default request
+class HttpClient {
+    private axiosInstance = axios.create({
+        // 可以在这里设置一些默认的配置，比如请求超时时间、请求头等
+        baseURL: import.meta.env.VITE_APP_BASE_API,
+        timeout: 5000
+    })
+
+    public http(config: myAxiosConfig): Promise<resStructure> {
+        return new Promise((resolve, reject) => {
+            this.axiosInstance(config.url, config).then((res) => {
+                resolve(res.data)
+            }).catch((err) => {
+                reject(err)
+            })
+        })
+
+    }
+}
+
+export default new HttpClient().http

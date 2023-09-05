@@ -1,5 +1,3 @@
-import {ElMessage} from 'element-plus'
-
 export function alertWarningMessage(message: string, duration = 3000) {
     ElMessage({
         type: 'warning',
