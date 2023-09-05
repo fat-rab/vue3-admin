@@ -22,7 +22,7 @@ axiosInstance.interceptors.request.use((config: AxiosRequestConfig): AxiosReques
     return Promise.reject(error)
 })
 // 响应拦截器
-axiosInstance.interceptors.response.use((response: AxiosResponse) => {
+axiosInstance.interceptors.response.use((response: AxiosResponse<ResStructure>) => {
     if (response.config.responseType === 'blob') return response
     const res: ResStructure = response.data
     // 如果code不是20000，那么弹出报错
