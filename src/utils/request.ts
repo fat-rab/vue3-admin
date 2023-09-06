@@ -22,7 +22,6 @@ axiosInstance.interceptors.request.use((config: AxiosRequestConfig): AxiosReques
         config.headers[TokenKey] = `${prefixStr} ${getToken()}`
     }
     if (config.contentType && config.contentType === 'application/x-www-form-urlencoded') {
-        console.log(config, 'config1')
         config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8'
         config.transformRequest = [
             function(data) {
@@ -30,7 +29,6 @@ axiosInstance.interceptors.request.use((config: AxiosRequestConfig): AxiosReques
             }
         ]
     }
-    console.log(config, 'config3')
     return config
 }, (error) => {
     return Promise.reject(error)
