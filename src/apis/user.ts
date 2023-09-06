@@ -12,8 +12,7 @@ export function login(data: object) {
 export function getInfo() {
     return request({
         url: '/api/user/info',
-        method: 'get',
-        contentType: 'application/x-www-form-urlencoded'
+        method: 'get'
     })
 }
 

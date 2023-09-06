@@ -5,6 +5,7 @@ import {UserActionEnum} from '@/ts/store/user'
 import {myAxiosConfig, ResStructure} from '@/ts/axios'
 import {useUserStore} from '@/store/user'
 import qs from 'qs'
+
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_API,
     timeout: 5000
@@ -12,23 +13,22 @@ const axiosInstance = axios.create({
 
 // 请求拦截器
 axiosInstance.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
+    if (!config.headers) {
+        config.headers = {
+            'Content-Type': 'application/json'
+        }
+    }
     if (getToken()) {
-        if (!config.headers) {
-            config.headers = {
-                'Content-Type': 'application/json'
-            }
-        }
         config.headers[TokenKey] = `${prefixStr} ${getToken()}`
-
-        if (config.contentType && config.contentType === 'application/x-www-form-urlencoded') {
-            console.log(config, 'config1')
-            config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8'
-            config.transformRequest = [
-                function(data) {
-                    return qs.stringify(data)
-                }
-            ]
-        }
+    }
+    if (config.contentType && config.contentType === 'application/x-www-form-urlencoded') {
+        console.log(config, 'config1')
+        config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8'
+        config.transformRequest = [
+            function(data) {
+                return qs.stringify(data)
+            }
+        ]
     }
     console.log(config, 'config3')
     return config
