@@ -1,6 +1,5 @@
 import {hasPermission} from '@/utils/permission'
 import {AppRouteRecordRaw} from '@/ts/router'
-import {RouteRecordName} from 'vue-router'
 import router from '@/router'
 
 export function filterRoute(routes: Array<AppRouteRecordRaw>, roles: Array<string>): Array<AppRouteRecordRaw> {
@@ -26,8 +25,8 @@ export function judgeShowingChild(item: AppRouteRecordRaw): Array<AppRouteRecord
 }
 
 
-export function getCachedRoutes(routes: Array<AppRouteRecordRaw>): Array<RouteRecordName> {
-    const res: Array<RouteRecordName> = []
+export function getCachedRoutes(routes: Array<AppRouteRecordRaw>): Array<string> {
+    const res: Array<string> = []
     routes.forEach((item) => {
         // 父路由可能不设置meta
         if (item.meta) {

@@ -9,7 +9,7 @@ export interface RouteMeta {
     affix?: boolean
 }
 
-export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta' | 'children'> {
+export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta' | 'children' | 'name'> {
     hidden?: boolean
     redirect?: string
     alwaysShow?: boolean
@@ -17,6 +17,7 @@ export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta' | 'childr
     children?: Array<AppRouteRecordRaw>
     pId?: string //仅仅用来后端返回路由的层级判断
     id?: string
+    name?: string
 }
 
 export interface RouteRedirect {
