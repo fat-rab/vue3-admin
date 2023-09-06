@@ -2,7 +2,7 @@ import axios, {AxiosRequestConfig, AxiosResponse} from 'axios'
 import {getToken, prefixStr, TokenKey} from '@/utils/auth'
 import {ElMessage, ElMessageBox} from 'element-plus'
 import {UserActionEnum} from '@/ts/store/user'
-import {myAxiosConfig, ResStructure} from '@/ts/axios'
+import {ResStructure} from '@/ts/axios'
 import {useUserStore} from '@/store/user'
 import qs from 'qs'
 
@@ -76,7 +76,7 @@ axiosInstance.interceptors.response.use((response: AxiosResponse<ResStructure>) 
 })
 
 class HttpClient {
-    public http(config: myAxiosConfig): Promise<ResStructure> {
+    public http(config: AxiosRequestConfig): Promise<ResStructure> {
         return new Promise((resolve, reject) => {
             axiosInstance(config).then((res) => {
                 resolve(res.data)

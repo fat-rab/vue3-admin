@@ -18,6 +18,7 @@ module.exports = {
         ecmaVersion: 2020
     },
     rules: {
+        // '@typescript-eslint/no-non-null-assertion': 0,
         'quotes': ['error', 'single'],
         'semi': ['error', 'never'],
         'vue/component-name-in-template-casing': ['error', 'kebab-case', {
