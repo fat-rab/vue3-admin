@@ -28,9 +28,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../styles/variables";
+@import "/src/styles/mixin";
 
 .navbar-container {
   height: $navbarHeight;
-  background-color: $mainColor;
+  //background-color: $mainColor;
+  @include themify('background-color', $main-color)
 }
 </style>

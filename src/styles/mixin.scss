@@ -6,3 +6,14 @@
   }
 
 }
+
+@mixin themify($key, $valueMap) {
+  // theme list
+  $themes: light, dark;
+
+  @each $theme in $themes {
+    [data-theme=#{$theme}] & {
+      #{$key}: map-get($valueMap, $theme);
+    }
+  }
+}

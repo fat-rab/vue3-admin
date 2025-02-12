@@ -48,6 +48,7 @@ router.beforeEach(async(to: RouteLocationNormalized, from: RouteLocationNormaliz
                         }
                     }
                     // 不直接使用next({...to, replace: true}),避免在动态路由的页面刷新浏览器出现警告并且跳转到404页面
+                    // TODO 后面将path:*路由放到动态路由中，就可以解决
                     if (to.path == '/404' && to.redirectedFrom !== undefined) {
                         // 即使重定向的的路由真的不存在，由于此时已经获取到角色，所以store.state.user.roles.length === 0不会通过
                         // 不会无限循环这个操作

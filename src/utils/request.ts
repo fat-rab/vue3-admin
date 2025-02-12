@@ -78,7 +78,7 @@ axiosInstance.interceptors.response.use((response: AxiosResponse<ResStructure>) 
 class HttpClient {
     public http(config: AxiosRequestConfig): Promise<ResStructure> {
         return new Promise((resolve, reject) => {
-            axiosInstance(config).then((res) => {
+            axiosInstance(config).then((res:AxiosResponse<ResStructure>) => {
                 resolve(res.data)
             }).catch((err) => {
                 reject(err)
